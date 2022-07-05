@@ -29,7 +29,7 @@ section#contactForm > #email-input, #topic-ddl, #msg-input { width: 78%; margin:
 button#btnSubmit { display: block; margin: 0 auto; }
 
 header h1 { display: block; margin: 0 auto; padding: 0.51em 1em; width: fit-content; border-bottom: 2px solid #0080FF; }
-
+button#cta-button { display: block; outline: 1px solid #000; margin: 2em auto; }
 ul.list { margin: 0em; padding: 0em; }
 aside.social_widget { outline: 0px solid #ccc; }
 div#region-1 span { margin: 0px 8px; padding: 0em 1em; border: 2px solid #aaa; }
@@ -69,7 +69,7 @@ div.form-row { outline: 1px solid #000; margin-bottom: 1.8em; }
 
 /* Mobile Landscape Screen Sizes */
 @media only screen and (min-width: 480px) and (max-width: 785px){ 
-     section#profile-image img { width: 296px; height: 296px; border-radius: 50%; } 
+     section#profile-image img { width: 208px; height: 224px; border-radius: 50%; } 
 }
 
 /* Desktop Screen Sizes */
