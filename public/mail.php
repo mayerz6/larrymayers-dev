@@ -5,6 +5,7 @@
  require './assets/PHPMailer/class.pop3.php';
  require './assets/PHPMailer/class.smtp.php';
  require './assets/PHPMailer/class.phpmaileroauth.php';
+ require './assets/classes/User.php';
 
  
 // use PHPMailer;
@@ -15,6 +16,8 @@ extract($_POST);
 // $bevCost = isset($_POST['bevCost']) ? $_POST['bevCost'] : '';
 
 $valStatus = true;
+$u = New User;
+
 $errMsg = array();
 
 if(!isset($email) || empty($email)){
@@ -73,7 +76,8 @@ if( isset($email) && isset($msgTopic) && isset($usrMsg) ){
     $mail->Debugoutput = 'html';
     
     //Set the hostname of the mail server
-    $mail->Host = 'mail.privateemail.com';
+    //$mail->Host = 'imap.titan.email';
+    $mail->Host = User::getHost();
     // use
     // $mail->Host = gethostbyname('smtp.gmail.com');
     // if your network does not support SMTP over IPv6
@@ -88,11 +92,14 @@ if( isset($email) && isset($msgTopic) && isset($usrMsg) ){
     $mail->SMTPAuth = true;
     
     
-    $mail->Username = "info@larrymayers.site";
-    $mail->Password = "M@y3rZ.S0urc3!6a";
+    //$mail->Username = "info@larrymayers.site";
+    $mail->Username = User::getEmail();
+   // $mail->Password = "M@y3rZ.S0urc#!9a";
+    $mail->Password = User::getPwd();
     
     //From email address and name
-    $mail->From = "info@larrymayers.site";
+   // $mail->From = "info@larrymayers.site";
+    $mail->From = User::getEmail();;
     $mail->FromName = "Larry Mayers";
     
     //To address and name

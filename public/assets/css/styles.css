@@ -29,17 +29,26 @@ section#contactForm > #email-input, #topic-ddl, #msg-input { width: 78%; margin:
 button#btnSubmit { display: block; margin: 0 auto; }
 
 header h1 { display: block; margin: 0 auto; padding: 0.51em 1em; width: fit-content; border-bottom: 2px solid #0080FF; }
-button#cta-button { display: block; outline: 1px solid #000; margin: 2em auto; }
+
 ul.list { margin: 0em; padding: 0em; }
 aside.social_widget { outline: 0px solid #ccc; }
+
+div#region-header a { margin: 0px 8px; padding: 0em 1em; border: 2px solid #aaa; color: #777; }
+
+div#region-header a { text-decoration: none; text-align: center; width: 76%; display: block; outline: 0px solid #000; margin: 2em auto; }
+div#region-header span#cta-button a:hover { cursor: pointer; color: #fff; background-color: #ef1f0b; }
+/* div#region-header span#cta-button:hover { cursor: pointer; color: #fff; } */
 div#region-1 span { margin: 0px 8px; padding: 0em 1em; border: 2px solid #aaa; }
 div#region-1 span#about:hover { cursor: pointer; color: #fff; background-color: #ff9300; }
 div#region-1 span#contact:hover { cursor: pointer; color: #fff; background-color: #d40e3f; }
 div#region-1 span#expert:hover { cursor: pointer; color: #fff; background-color: #1F85DE; }
+
 span.selected {  color: #fff; background-color: #1F85DE; }
 div.block { outline: 0px solid #000; padding: 0% 12%; }
 div.block h6 { width: fit-content; font-size: 16pt; outline: 0px solid #000; }
-section#contactForm span { display: block; margin-bottom: 1.8em; }
+span#content section#contactForm { text-align: left; }
+section#contactForm span#emailErrorMsg { display: inline-block; margin-bottom: 0em; }
+section#contactForm small#emailHelp { display: block; outline: 1px solid #000; margin-bottom: 0.8em; }
 
 
 h6.des { display: block; margin: 10px auto; width: fit-content; font-size: 16pt; outline: 0px solid #000; }
@@ -58,6 +67,7 @@ div.form-row { outline: 1px solid #000; margin-bottom: 1.8em; }
 /* Mobile Portrait Screen Sizes */
 @media only screen and (min-width: 320px) and (max-width: 479px){
     div#region-1 span { margin: 0px; }
+    div#region-header a { width: 56%; }
      section#profile-image { padding-bottom: 0em; margin-top: 1.8em; } 
      section#profile-image img { display: block; margin: 0 auto; width: 206px; height: 206px; border: 2px solid #ccc;  border-radius: 50%; } 
      div.space { padding: 1em; } 
@@ -68,8 +78,9 @@ div.form-row { outline: 1px solid #000; margin-bottom: 1.8em; }
 }
 
 /* Mobile Landscape Screen Sizes */
-@media only screen and (min-width: 480px) and (max-width: 785px){ 
+@media only screen and (min-width: 480px) and (max-width: 786px){ 
      section#profile-image img { width: 208px; height: 224px; border-radius: 50%; } 
+     div#region-header a { width: 40%; }
 }
 
 /* Desktop Screen Sizes */
@@ -77,6 +88,7 @@ div.form-row { outline: 1px solid #000; margin-bottom: 1.8em; }
     div.icon img { height: 82px; } 
      section#profile-image img { display: block; margin: 0 auto; width: 404px; height: 404px; border-radius: 50%; } 
      section#logo img { width: 4%; display: block; margin: 0 auto; }
+     div#region-header a { text-decoration: none; text-align: center; width: 24%; display: block; outline: 0px solid #000; margin: 2em auto; }
      span#content { width: 60%; margin: 0 auto; }
      div.footer-area { width: 60%; margin: 0 auto; }
      section#logo img { width: 10%; display: block; margin: 0 auto; }
@@ -90,6 +102,7 @@ div.form-row { outline: 1px solid #000; margin-bottom: 1.8em; }
     section#profile-image img { width: 296px; height: 296px; border-radius: 50%; }
     div.footer-area { width: 60%; margin: 0 auto; }
     span#content { width: 60%; margin: 0 auto;  }
+    div#region-header a { width: 20%; }
 }
 
 
@@ -97,10 +110,12 @@ div.form-row { outline: 1px solid #000; margin-bottom: 1.8em; }
 /* X-Large devices (large desktops, 1200px and up) */
 @media (min-width: 1200px) {
     section#profile-image img { width: 542px; height: 542px; border-radius: 50%; }
+    div#region-header a { width: 16%; }
  }
 
 /* XX-Large devices (larger desktops, 1400px and up)  */
 @media (min-width: 1400px) {
+    div#region-header a { width: 14%; }
     section#profile-image img { width: 646px; height: 646px; border-radius: 50%; }
     section#logo img { width: 4%; display: block; margin: 0 auto; }
  }
