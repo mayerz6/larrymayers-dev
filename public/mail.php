@@ -62,6 +62,10 @@ if( isset($email) && isset($msgTopic) && isset($usrMsg) ){
     
         //PHPMailer Object
     $mail = new PHPMailer(true); //Argument true in constructor enables exceptions
+  
+    
+    try {
+
     $mail->isSMTP();
     $mail->isHTML(true);
     
@@ -78,20 +82,26 @@ if( isset($email) && isset($msgTopic) && isset($usrMsg) ){
     //Set the hostname of the mail server
     //$mail->Host = 'imap.titan.email';
     $mail->Host = User::getHost();
-    // use
+   // echo User::getHost();
     // $mail->Host = gethostbyname('smtp.gmail.com');
     // if your network does not support SMTP over IPv6
-    
-    //Set the SMTP port number - 587 for authenticated TLS, a.k.a. RFC4409 SMTP submission
-    $mail->Port = 587;
     
     //Set the encryption system to use - ssl (deprecated) or tls
     $mail->SMTPSecure = 'tls';
     
+    //Set the SMTP port number - 587 for authenticated TLS, a.k.a. RFC4409 SMTP submission
+    $mail->Port = 587;
+    
     //Whether to use SMTP authentication
     $mail->SMTPAuth = true;
     
-    
+    $mail->SMTPOptions = array(
+        'ssl' => array(
+        'verify_peer' => false,
+        'verify_peer_name' => false,
+        'allow_self_signed' => true
+        )
+        );
     //$mail->Username = "info@larrymayers.site";
     $mail->Username = User::getEmail();
    // $mail->Password = "M@y3rZ.S0urc#!9a";
@@ -99,15 +109,15 @@ if( isset($email) && isset($msgTopic) && isset($usrMsg) ){
     
     //From email address and name
    // $mail->From = "info@larrymayers.site";
-    $mail->From = User::getEmail();;
+    $mail->From = User::getEmail();
     $mail->FromName = "Larry Mayers";
     
     //To address and name
-    $mail->addAddress("larry.mayers@outlook.com", "Larry Mayers");
-    // $mail->addAddress("info@larrymayers.site", "Larry Mayers"); //Recipient name is optional
+    $mail->addAddress(User::getEmail(), "Larry Mayers");
+    $mail->addAddress($email, "Recent Visitor"); //Recipient name is optional
     
     //Address to which recipient will reply
-    // $mail->addReplyTo("larrymayers101@gmail.com", "Reply");
+   //  $mail->addReplyTo($email, "Visitor");
     
     //CC and BCC
      //$mail->addCC("info@larrymayers.site");
@@ -134,7 +144,6 @@ if( isset($email) && isset($msgTopic) && isset($usrMsg) ){
     
     
     
-    try {
         $mail->send();
         echo "Message has been sent successfully";
        

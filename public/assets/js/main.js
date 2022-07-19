@@ -208,13 +208,13 @@ this.btnSubmit.addEventListener("click", () => {
             this.emailConfirm.style = "color: #2ecc71;";
 
       try {
-        // responseObject = JSON.parse(request.responseText);
-         //  console.log(request.responseText);
+       //   console.log(request.responseText);
+         responseObject = JSON.parse(request.responseText);
           } catch(e) {
            console.error(e);
          }
-               // console.log('Contact Form Submitted!');
-               // console.log(requestData);
+                console.log('Contact Form Submitted!');
+                console.log(requestData);
     
                this.formDataDestroy();
                // this.emailConfirm.opacity = 0;

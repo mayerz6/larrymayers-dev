@@ -25,7 +25,8 @@ section#logo img { width: 12%; display: block; margin: 0 auto; }
 section#logo { margin: 1em 0em; }
 section#profile-image img { display: block; margin: 0 auto; width: 172px; height: 172px; border-radius: 50%; }
 section#profile-image { margin: 1.8em 0em; outline: 0px solid #000; }
-section#contactForm > #email-input, #topic-ddl, #msg-input { width: 78%; margin: 10px auto; outline: 1px solid #000; }
+section#contactForm > #email-input, #topic-ddl, #msg-input { width: 78%; margin: 10px auto; outline: 0px solid #000; }
+section#contactForm span#emailConfirm { display: block; width: 78%; margin: 10px auto; outline: 0px solid #000; }
 button#btnSubmit { display: block; margin: 0 auto; }
 
 header h1 { display: block; margin: 0 auto; padding: 0.51em 1em; width: fit-content; border-bottom: 2px solid #0080FF; }
@@ -48,8 +49,9 @@ div.block { outline: 0px solid #000; padding: 0% 12%; }
 div.block h6 { width: fit-content; font-size: 16pt; outline: 0px solid #000; }
 span#content section#contactForm { text-align: left; }
 section#contactForm span#emailErrorMsg { display: inline-block; margin-bottom: 0em; }
-section#contactForm small#emailHelp { display: block; outline: 1px solid #000; margin-bottom: 0.8em; }
+section#contactForm small#emailHelp { display: block; outline: 0px solid #000; margin-bottom: 0.8em; }
 
+section#contactForm div#msg-input textarea#feedbackMsg { width: 100%; height: 100%; }
 
 h6.des { display: block; margin: 10px auto; width: fit-content; font-size: 16pt; outline: 0px solid #000; }
 aside.social_widget > ul.list > li { margin: 0em 0.8em; display: inline-block; outline: 0px solid #ccc; }
