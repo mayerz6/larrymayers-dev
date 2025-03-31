@@ -6,10 +6,12 @@ class Links{
         this.aboutLink = document.getElementById('about');
         this.expertLink = document.getElementById('expert');
         this.contactLink = document.getElementById('contact');  
+        this.resumeLink = document.getElementById('resume');  
 
         this.contactLink.addEventListener("click", this.clickContactHandler.bind(this));
         this.aboutLink.addEventListener("click", this.clickAboutHandler.bind(this));
         this.expertLink.addEventListener("click", this.clickExpertiseHandler.bind(this));
+        this.resumeLink.addEventListener("click", this.clickResumeHandler.bind(this));
         
     }
 
@@ -95,7 +97,28 @@ class Links{
         document.getElementById('content').style = "border-top: 20px solid #1F85DE;";
     }
 
+    clickResumeHandler() { // New Method for Resume
+        let xhr = new XMLHttpRequest();
+        xhr.open('GET', './assets/regions/content/resume.html', true); // Ensure you have this file
+        xhr.onreadystatechange = function () {
+            if (this.readyState == 4 && this.status == 200) {
+                document.getElementById("content").innerHTML = this.responseText;
+            }
+        };
+        xhr.onerror = function () {
+            console.log("Data request error...");
+        };
+        xhr.send();
+        document.getElementById('about').style = "color: #777; background-color: #fff;";
+        document.getElementById('contact').style = "color: #777; background-color: #fff;";
+        document.getElementById('expert').style = "color: #777; background-color: #fff;";
+        document.getElementById('resume').style = "color: #fff; background-color: #00b300;"; // Highlight Resume Link
+        document.getElementById('content').style = "border-top: 20px solid #00b300;";
+    }
 }
+
+
+
 
 
 class Form{

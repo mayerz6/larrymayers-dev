@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+
+<html lang="en">
+    <head>
+
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+        <title>Larry Mayers | Professional Portfolio Blog</title>
+
+        <meta name="description" content="Larry Mayers is a system's administrator, full stack developer, and data analysis from Bridgetown, Barbados.">
+        <meta name="keywords" content="Larry Mayers, professional, web, developer, data analysis, portfolio, site, career, ICT, IT, career, CV, resume, HTML, CSS, JS, PHP">
+        
+        <link rel="icon" href="./assets/img/banner/lm-graphic.png">
+        <link rel="canonical" href="https://larrymayers.site/"> 
+
+
+        <meta property="og:locale" content="en_US">
+        <meta property="og:type" content="website">
+        <meta property="og:title" content="Larry Mayers | Professional Portfolio Blog">
+        <meta property="og:description" content="Watch as I showcase my career highlights as a prolific ICT professional, via my custom portfolio website!">
+        <meta property="og:url" content="https://larrymayers.site/blog.html">
+           
+        <meta property="og:site_name" content="Larry Mayers Professional Development History">
+        <meta property="og:image" content="https://larrymayers.site/assets/img/banner/mayers-mini.png">
+        <meta property="og:image:width" content="400">
+        <meta property="og:image:height" content="400">
+        <meta property="og:image:type" content="image/png">
+        <meta name="twitter:card" content="summary_large_image">
+
+        <!-- FONT AWESOME CDN Link -->
+        <link href="assets/fa/css/all.css" rel="stylesheet">
+        <!-- CSS Design -->
+        <!-- <link rel="stylesheet" href="assets/css/styles.css"> -->
+        <link rel="stylesheet" href="assets/css/styles.css"> 
+        <!-- JS Functionality -->
+        <script src="./assets/js/fetch_blog_posts.js" async></script>
+        <script src="./assets/js/features.js" async></script> 
+        
+
+    </head>
+    <body>
+        <header></header>
+      
+        <!-- Load Records From DB -->
+        <div id="region_2">
+            <span id="content">
+                <h1>Incoming Dynamic Content</h1>
+
+            
+              
+                <form id="blogForm">
+                    <fieldset>
+                        <label>Blog Title</label>
+                        <input type="text" name="title">
+                        <br>
+                        <label>Blog Author</label>
+                        <input type="text" name="author">
+                        <br>
+                        <label>Blog Contents</label>
+                        <input type="text" name="contents">
+                        <br>
+
+                        <button type="button" onclick="addPost()">Submit</button>
+                    </fieldset>
+                </form>
+
+                <div id="message"></div>
+
+                
+                <div id="content_screen">
+                    Loading blog posts...
+                </div>
+      
+                
+            </span>
+        </div>
+        
+            <footer></footer>
+        
+    </body>
+</html>
+

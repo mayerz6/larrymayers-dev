@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+
+<html lang="en">
+    <head>
+
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        
+        <title>Larry Mayers | Professional Portfolio | Simple Calculator</title>
+        
+        <meta name="description" content="Larry Mayers is a system's administrator, full stack developer, and data analysis from Bridgetown, Barbados.">
+        <meta name="keywords" content="Larry Mayers, professional, web, developer, data analysis, portfolio, site, career, ICT, IT, career, CV, resume, HTML, CSS, JS, PHP">
+        
+        <link rel="icon" href="./assets/img/banner/lm-graphic.png">
+        <link rel="canonical" href="https://larrymayers.site/"> 
+
+
+        <meta property="og:locale" content="en_US">
+        <meta property="og:type" content="website">
+        <meta property="og:title" content="Larry Mayers | Professional Portfolio">
+        <meta property="og:description" content="Watch as I showcase my career highlights as a prolific ICT professional, via my custom portfolio website!">
+        <meta property="og:url" content="https://larrymayers.site/">
+           
+        <meta property="og:site_name" content="Larry Mayers Professional Development History">
+        <meta property="og:image" content="https://larrymayers.site/assets/img/banner/mayers-mini.png">
+        <meta property="og:image:width" content="400">
+        <meta property="og:image:height" content="400">
+        <meta property="og:image:type" content="image/png">
+        <meta name="twitter:card" content="summary_large_image">
+
+        <!-- FONT AWESOME CDN Link -->
+        <link href="assets/fa/css/all.css" rel="stylesheet">
+        <!-- CSS Design -->
+        <!-- <link rel="stylesheet" href="assets/css/styles.css"> -->
+        <link rel="stylesheet" href="assets/css/styles.css"> 
+        <style>
+            #result { margin-top: 20px; font-weight: bold; padding: 1em; outline: 1px solid #000;}
+        </style>
+        <!-- JS Functionality -->
+        <script src="./assets/js/calculator.js" async></script>
+        <script src="./assets/js/main.js" async></script>
+
+
+    </head>
+
+    <body>
+
+           <!-- Header Region -->
+           <header></header>
+           <!-- End of Header Region -->
+
+             <!--================ Main Content Area =================-->
+    
+             <div id="region-4"><span id="calculator_content">
+                <div id="calculator-msg">
+                    <h1>Simple PHP Calculator</h1>
+                   <!-- <form action="calculator.php" name="cal_form" method="POST"> -->
+                   <form id="cal_form" name="cal_form">
+                       <p>Have a GO with my basic calculator!</p>
+                        <fieldset>
+                            <div>
+                                <label>1st Input Value</label>
+                                <input type="text" name="val_1" autocomplete="off">
+                            </div>
+                        
+                            <div>
+                                <label>2nd Input Value</label>
+                                <input type="text" name="val_2" autocomplete="off">
+                            </div>
+                            <div>
+                                <button type="button" onclick="calculate('add')">Add</button> | 
+                                <button type="button" onclick="calculate('subtract')">Subtract</button>
+                            </div>
+                        </fieldset>
+                    </form>
+                    <hr>
+                <div id="result"></div>
+                </div>
+        
+                </span>
+            </div>
+            <hr>
+    <div id="region-1">
+        <span id="about">About</span>
+        <span id="contact">Contact</span>
+        <span id="expert">Expertise</span>
+    </div>
+
+    <div id="region-2"><span id="content">
+        <div id="screen-msg">
+            <small class="quote">...get to know me</small>
+            
+            <p>Watch as I showcase my career highlights as a technology disciple, specializing in Computer Systems, Website development &amp; Data Analytics.
+                Monitor my growth first hand; right here. Should be <b>a lot</b> of fun!</p>
+         
+            <hr>
+        </div>
+    </span></div>
+
+
+    <div id="region-3"></div>
+
+    <!--================ End Of Main Content Area =================-->
+
+            <!-- Footer Region -->
+            <footer></footer>
+            <!-- End of Footer Region -->
+
+
+
+    </body>
+
+</html>
