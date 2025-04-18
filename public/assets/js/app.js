@@ -108,7 +108,6 @@ class Links {
 
 class Form{
 
-
     constructor(){
     
         /* Design a function which will handle the processing of data submitted by the user. */
