@@ -20,4 +20,10 @@ class BlogController {
         return $output;
 
     }
+
+    public function addPost(): bool { return true; }
+    public function updatePost(): bool { return true; }
+    public function deletePost(): bool { return true; }
+
+
 }

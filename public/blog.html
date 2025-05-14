@@ -35,7 +35,7 @@
         <!-- <link rel="stylesheet" href="assets/css/styles.css"> -->
         <link rel="stylesheet" href="assets/css/styles.css"> 
         <!-- JS Functionality -->
-        <script src="./assets/js/fetch_blog_posts.js" async></script>
+        <script src="./assets/js/blog_app.js" async></script>
         <script src="./assets/js/features.js" async></script> 
         
 
@@ -43,9 +43,17 @@
     <body>
         <header></header>
       
+        <!--================ Main Content Area =================-->
+        
+        <div id="region-1">
+            <span id="create">Create</span>
+            <span id="update">Update</span>
+            <span id="delete">Delete</span>
+        </div>
+
         <!-- Load Records From DB -->
         <div id="region_2">
-            <span id="content">
+            <section id="content">
                 <h1>Incoming Dynamic Content</h1>
 
             
@@ -53,20 +61,27 @@
                 <form id="blogForm">
                     <fieldset>
                         <label>Blog Title</label>
-                        <input type="text" name="title">
+                        <input type="text" name="title" id="title">
+                        <span id="btErrorMsg"></span>
                         <br>
                         <label>Blog Author</label>
-                        <input type="text" name="author">
+                        <input type="text" name="author" id="author">
+                        <span id="baErrorMsg"></span>
                         <br>
                         <label>Blog Contents</label>
-                        <input type="text" name="contents">
+                        <input type="text" name="contents" id="contents">
+                        <span id="bcErrorMsg"></span>
                         <br>
-
-                        <button type="button" onclick="addPost()">Submit</button>
+                        
+                        
+                        <button type="submit">Submit</button>
+                        <!-- <button type="button" onclick="submitPost()">Submit</button> -->
                     </fieldset>
                 </form>
-
-                <div id="message"></div>
+                
+                    <div id="formSuccessBanner"></div>
+                    <div id="formErrorBanner"></div>
+                    <div id="message"></div>
 
                 
                 <div id="content_screen">
@@ -74,7 +89,7 @@
                 </div>
       
                 
-            </span>
+            </section>
         </div>
         
             <footer></footer>

@@ -1,101 +1,101 @@
-class Links{
+// class Links{
 
-    constructor(){
+//     constructor(){
 
-        /* Instantiate the elements of your NAV links */
-        this.aboutLink = document.getElementById('about');
-        this.expertLink = document.getElementById('expert');
-        this.contactLink = document.getElementById('contact');  
+//         /* Instantiate the elements of your NAV links */
+//         this.aboutLink = document.getElementById('about');
+//         this.expertLink = document.getElementById('expert');
+//         this.contactLink = document.getElementById('contact');  
 
-        this.contactLink.addEventListener("click", this.clickContactHandler.bind(this));
-        this.aboutLink.addEventListener("click", this.clickAboutHandler.bind(this));
-        this.expertLink.addEventListener("click", this.clickExpertiseHandler.bind(this));
+//         this.contactLink.addEventListener("click", this.clickContactHandler.bind(this));
+//         this.aboutLink.addEventListener("click", this.clickAboutHandler.bind(this));
+//         this.expertLink.addEventListener("click", this.clickExpertiseHandler.bind(this));
         
-    }
+//     }
 
-    /* Simple Method to FETCH content for the ABOUT section of the page. */
-    clickAboutHandler(){
+//     /* Simple Method to FETCH content for the ABOUT section of the page. */
+//     clickAboutHandler(){
 
-        let xhr = new XMLHttpRequest();
+//         let xhr = new XMLHttpRequest();
 
-        xhr.open('GET', './assets/regions/content/about.html', true);
+//         xhr.open('GET', './assets/regions/content/about.html', true);
 
-        xhr.onreadystatechange = function(){
-            if(this.readyState == 4 && this.status == 200){
+//         xhr.onreadystatechange = function(){
+//             if(this.readyState == 4 && this.status == 200){
             
-                document.getElementById("content").innerHTML = this.responseText;
+//                 document.getElementById("content").innerHTML = this.responseText;
               
-            }
-        }
+//             }
+//         }
 
-        xhr.onerror = function(){
-            console.log("Data request error...");
-        }
+//         xhr.onerror = function(){
+//             console.log("Data request error...");
+//         }
  
-        xhr.send();
-        document.getElementById('about').style = "color: #fff; background-color: #ff9300;";
-        document.getElementById('contact').style = "color: #777; background-color: #fff;";
-        document.getElementById('expert').style = "color: #777; background-color: #fff;";
-        document.getElementById('content').style = "border-top: 20px solid #ff9300;";
+//         xhr.send();
+//         document.getElementById('about').style = "color: #fff; background-color: #ff9300;";
+//         document.getElementById('contact').style = "color: #777; background-color: #fff;";
+//         document.getElementById('expert').style = "color: #777; background-color: #fff;";
+//         document.getElementById('content').style = "border-top: 20px solid #ff9300;";
 
 
 
-       // console.clear();
+//        // console.clear();
 
-    }
+//     }
 
-    /* Simple Method to FETCH content for the Contact section of the page. */
-    clickContactHandler(){
+//     /* Simple Method to FETCH content for the Contact section of the page. */
+//     clickContactHandler(){
         
-        let xhr = new XMLHttpRequest();
+//         let xhr = new XMLHttpRequest();
 
-        xhr.open('GET', './assets/regions/content/contact.html', true);
+//         xhr.open('GET', './assets/regions/content/contact.html', true);
 
-        xhr.onreadystatechange = function(){
-            if(this.readyState == 4 && this.status == 200){
-                document.getElementById("content").innerHTML = this.responseText;
-                       new Form();  
-                    //  Form.loadForm(); 
-            }
-        }
+//         xhr.onreadystatechange = function(){
+//             if(this.readyState == 4 && this.status == 200){
+//                 document.getElementById("content").innerHTML = this.responseText;
+//                        new Form();  
+//                     //  Form.loadForm(); 
+//             }
+//         }
 
-        xhr.onerror = function(){
-            console.log("Data request error...");
-        }
+//         xhr.onerror = function(){
+//             console.log("Data request error...");
+//         }
  
-        xhr.send();
-        document.getElementById('about').style = "color: #777; background-color: #fff;";
-        document.getElementById('contact').style = "color: #fff; background-color: #d40e3f;";
-        document.getElementById('expert').style = "color: #777; background-color: #fff;";
-        document.getElementById('content').style = "border-top: 20px solid #d40e3f;";
-    }
+//         xhr.send();
+//         document.getElementById('about').style = "color: #777; background-color: #fff;";
+//         document.getElementById('contact').style = "color: #fff; background-color: #d40e3f;";
+//         document.getElementById('expert').style = "color: #777; background-color: #fff;";
+//         document.getElementById('content').style = "border-top: 20px solid #d40e3f;";
+//     }
 
-    clickExpertiseHandler(){
+//     clickExpertiseHandler(){
         
-        let xhr = new XMLHttpRequest();
+//         let xhr = new XMLHttpRequest();
 
-        xhr.open('GET', './assets/regions/content/expertise.html', true);
+//         xhr.open('GET', './assets/regions/content/expertise.html', true);
 
-        xhr.onreadystatechange = function(){
-            if(this.readyState == 4 && this.status == 200){
+//         xhr.onreadystatechange = function(){
+//             if(this.readyState == 4 && this.status == 200){
               
-                document.getElementById("content").innerHTML = this.responseText;
+//                 document.getElementById("content").innerHTML = this.responseText;
              
-            }
-        }
+//             }
+//         }
 
-        xhr.onerror = function(){
-            console.log("Data request error...");
-        }
+//         xhr.onerror = function(){
+//             console.log("Data request error...");
+//         }
  
-        xhr.send();
-        document.getElementById('about').style = "color: #777; background-color: #fff;";
-        document.getElementById('contact').style = "color: #777; background-color: #fff;";
-        document.getElementById('expert').style = "color: #fff; background-color: #1F85DE;";
-        document.getElementById('content').style = "border-top: 20px solid #1F85DE;";
-    }
+//         xhr.send();
+//         document.getElementById('about').style = "color: #777; background-color: #fff;";
+//         document.getElementById('contact').style = "color: #777; background-color: #fff;";
+//         document.getElementById('expert').style = "color: #fff; background-color: #1F85DE;";
+//         document.getElementById('content').style = "border-top: 20px solid #1F85DE;";
+//     }
 
-}
+// }
 
 
 class Form{
@@ -283,7 +283,7 @@ formDataDestroy(){
 // new Links();
 
  /* Unique approach to inserting content within the site dynamically. */ 
-    fetch("./assets/regions/nav.html").then(function(response){
+    fetch("./assets/regions/blog_content/blog_nav.html").then(function(response){
                 return response.text(); 
                 }).then(function(string){
                   //  Load navigation region.
@@ -304,7 +304,7 @@ formDataDestroy(){
 
         
 /* Designation of the CLASS used to validate our user input. */
-class Validator {
+class Validaaator {
 
     static REQUIRED = "REQUIRED";
     static MIN_LENGTH = "MIN_LENGTH";

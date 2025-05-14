@@ -14,7 +14,7 @@ class Blog {
     public function __construct(){
         $this->db = (new Database())->getConnection();
     }
-    
+
     public function fetch(int $limit): array {
         $stmt = $this->db->prepare("SELECT title, content, author, date_created FROM blog_posts ORDER BY date_created DESC LIMIT :lim");
         $stmt->bindValue(':lim', $limit, PDO::PARAM_INT);
@@ -22,4 +22,8 @@ class Blog {
 
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
+
+    public function addPost(){  }
+    public function updatePost(){  }
+    public function deletePost($rec_id){  }
 }
