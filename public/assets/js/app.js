@@ -106,6 +106,23 @@ class Links {
 }
 
 
+class FormCache{
+
+    static load(formId){
+        const form = document.getElementById(formId);
+        if(!form) throw new Error(`Form #${formId} Not Found!`);
+
+        this.form = form;
+        this.emailInput = form.querySelector('emailInput');
+        this.emailError = form.querySelector('#emailErrorMsg');
+        this.topicInput = form.querySelector('#msgTopic');
+        this.topicError = form.querySelector('#topicErrorMsg');
+        this.msgInput = form.querySelector('#feedbackMsg');
+        this.msgError = form.querySelector('#feedbackErrorMsg');
+    }
+}
+
+
 class Form{
 
     constructor(){
@@ -202,55 +219,57 @@ this.emailInput.addEventListener("blur", () => {
 
 });          
 
-this.btnSubmit.addEventListener("click", () => {
-    
+this.btnSubmit.addEventListener("click", (e) => {
+    e.preventDefault();
+    this.subMsg();
+});
+
+}
+
+
+async subMsg(){
     /* Must validate the user input before processing. */
     if(this.emailValid && this.msgValid && this.topicValid){
-
-        const request = new XMLHttpRequest();
-
-        request.onload = () => {
-
-            this.emailConfirm.innerHTML = "<b>Email Successfully Sent!</b>";
-            this.emailConfirm.style = "color: #2ecc71;";
-
-      try {
-       //   console.log(request.responseText);
-         responseObject = JSON.parse(request.responseText);
-          } catch(e) {
-           console.error(e);
-         }
-                console.log('Contact Form Submitted!');
-                console.log(requestData);
-    
-               this.formDataDestroy();
-               // this.emailConfirm.opacity = 0;
-
-        }
         
-            let requestData = `email=${this.emailInput.value}`;
-            requestData += `&msgTopic=${this.msgTopic.value}`;
-            requestData += `&usrMsg=${this.usrMsg.value}`;
-           
-            
-            request.open('post', './mail.php');
-            request.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
-            request.send(requestData);
+        const data = {
+            email: this.emailInput.value.trim(),
+            topic: this.msgTopic.value.trim(),
+            message: this.usrMsg.value.trim()
+        };
+
+        try {
             this.emailConfirm.innerHTML = "...Sending Message";
-            this.emailConfirm.style = "color: #EE5552;";
-              
-             
-    } else {
-         
-        this.emailConfirm.innerHTML = "<b>Please complete the form details above.</b>";
-        this.emailConfirm.style = "color: #ff0000;";
-     
+            this.emailConfirm.style.color = "#EE5552";
+
+        const response = await fetch("post_message.php", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/x-www-form-urlencoded"
+            },
+            body: new URLSearchParams(data)
+        });
+        console.log(data);
+        const text = await response.text();
+        if(!response.ok) throw new Error(text);
+
+        this.emailConfirm.innerHTML = "<b>Email Successfully Sent!</b>";
+        this.emailConfirm.style.color = "#2ecc71";
+
+        console.log("Contact Form Submitted!", data);
+
+        this.formDataDestroy(); // Optional reset/clear method
+/* Reset Form INPUT fields */
+
+    } catch (err) {
+        this.emailConfirm.innerHTML = `❌ ${err.message}`;
+        this.emailConfirm.style.color = "red";
+        console.error("Submission error:", err);
+    }
+} else {
+    this.emailConfirm.innerHTML = "<b>Please complete the form details above.</b>";
+    this.emailConfirm.style.color = "#ff0000";
     console.log("Message NOT Sent!");
- }
-
-    });
-
-
+}
 
 }
 
@@ -279,10 +298,7 @@ formDataDestroy(){
 
 }
 
-    static processFormData(){
-    
-       
-    }
+  
 
 }
 
@@ -306,3 +322,41 @@ fetch("./assets/regions/footer.html").then(function(response) {
 }).catch(function(err) {
     console.log('Fetch error occurred', err);
 });
+
+
+
+/* Designation of the CLASS used to validate our user input. */
+class Validator {
+
+    static REQUIRED = "REQUIRED";
+    static MIN_LENGTH = "MIN_LENGTH";
+    static NUMBER = "NUMBER";
+    static MAX_LENGTH = "MAX_LENGTH";
+    static DROP_BOX = "DROP_BOX";
+    static EMAIL = "EMAIL";
+
+static validate(value, flag, validatorValue){
+    if(flag === this.REQUIRED){
+        return value.trim().length > 0;
+    }
+    if(flag === this.MIN_LENGTH){
+        return value.trim().length > validatorValue;
+    }
+    if(flag === this.MAX_LENGTH){
+        return value.length < validatorValue;
+    }
+    if(flag === this.NUMBER){
+        return isNaN(value) ;
+    }
+    if(flag === this.DROP_BOX){
+        return value > 0;
+    }
+    if(flag === this.EMAIL){
+        return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value);
+    }
+}
+
+
+}
+
+

@@ -174,8 +174,8 @@ section#logo img { width: 12%; display: block; margin: 0 auto; }
 section#logo { margin: 1em 0em; }
 section#profile-image img { display: block; margin: 0 auto; width: 102px; height: 102px; border-radius: 50%; }
 section#profile-image { margin: 1.8em 0em; outline: 0px solid #000; }
-section#contactForm > #email-input, #topic-ddl, #msg-input { width: 78%; margin: 10px auto; outline: 0px solid #000; }
-section#contactForm span#emailConfirm { display: block; width: 78%; margin: 10px auto; outline: 0px solid #000; }
+section#contactForm > #email-input, #topic-ddl, #msg-input { width: 100%; margin: 10px auto; outline: 0px solid #000; }
+section#contactForm span#emailConfirm { display: block; width: 100%; margin: 10px auto; outline: 0px solid #000; }
 button#btnSubmit { display: block; margin: 0 auto; }
 
 header h1 { display: block; margin: 0 auto; padding: 0.51em 1em; width: fit-content; border-bottom: 2px solid #0080FF; }
