@@ -1,4 +1,12 @@
 node_modules/
+# ignore ALL .log files
+*.log
 
-# Ignore test homepage file
-index-01.html
+#ignore ALL .zip files
+*.zip
+
+#ignore ALL .rar files
+*.rar
+
+projects/
+Secrets.*

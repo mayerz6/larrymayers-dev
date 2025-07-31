@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        
+        <title>Larry Mayers | Professional Portfolio | Simple Contact Form</title>
+        
+        <meta name="description" content="Larry Mayers is a system's administrator, full stack developer, and data analysis from Bridgetown, Barbados.">
+        <meta name="keywords" content="Larry Mayers, professional, web, developer, data analysis, portfolio, site, career, ICT, IT, career, CV, resume, HTML, CSS, JS, PHP">
+        
+        <link rel="icon" href="./assets/img/banner/lm-graphic.png">
+        <link rel="canonical" href="https://larrymayers.site/"> 
+
+
+        <meta property="og:locale" content="en_US">
+        <meta property="og:type" content="website">
+        <meta property="og:title" content="Larry Mayers | Professional Portfolio">
+        <meta property="og:description" content="Watch as I showcase my career highlights as a prolific ICT professional, via my custom portfolio website!">
+        <meta property="og:url" content="https://larrymayers.site/">
+           
+        <meta property="og:site_name" content="Larry Mayers Professional Development History">
+        <meta property="og:image" content="https://larrymayers.site/assets/img/banner/mayers-mini.png">
+        <meta property="og:image:width" content="400">
+        <meta property="og:image:height" content="400">
+        <meta property="og:image:type" content="image/png">
+        <meta name="twitter:card" content="summary_large_image">
+
+
+        <!-- FONT AWESOME CDN Link -->
+        <link href="assets/fa/css/all.css" rel="stylesheet">
+        <!-- CSS Design -->
+        <!-- <link rel="stylesheet" href="assets/css/styles.css"> -->
+        <link rel="stylesheet" href="assets/css/styles.css"> 
+        
+        <style>
+            div#region-4 { padding: 1em 2em; margin: 2em auto; width: 48%; outline: 2px solid #f3020293; }
+        </style>
+    
+    </head>
+    <!-- JS Functionality -->
+    <script src="./assets/js/contact-form.js" async></script>
+    <script src="./assets/js/main.js" async></script>
+
+    <body>
+        <header></header>
+            <div id="region-4">
+                <div id="contact-form">
+                    <h1>Simple PHP Contact Form</h1>
+                    <form id="contact_form" name="contact_form" method="POST" action="index.php?page=contact">
+                    <!-- <form id="contact_form" name="contact_form" method="POST" action="contact_form.php"> -->
+                        <fieldset>
+                            <label for="firstname">Firstname: </label><input type="text" name="firstname" id="firstname" required /><br>
+                            <label for="lastname">Lastname: </label><input type="text" name="lastname" id="lastname" required /><br>
+                            <label for="email">Email: </label><input type="text" name="email" id="email" required /><br>
+                            <label for="topic">Topic: </label>
+                            <select name="topic" id="topic">
+                                <option value="0">-- Select Topic --</option>
+                                <option value="Feedback">Feedback</option>
+                                <option value="Issue Request">Issue Request</option>
+                            </select><br>
+                            <label for="message">Mesage: </label><textarea name="message" id="message"></textarea><br><br>
+                            <button type="submit">Send Message</button>
+                            <div id="responseMsg"></div>
+                        </fieldset>
+                    </form>
+                </div>
+            </div>
+
+
+            <hr>
+            <div id="region-1">
+                <span id="about">About</span>
+                <span id="contact">Contact</span>
+                <span id="expert">Expertise</span>
+                <span id="resume">Resume</span>
+            </div>
+
+
+        <footer></footer>
+    </body>
+</html>

@@ -1,0 +1,78 @@
+ <details>
+                            <summary>
+                                <h5>AWS Data Engineer <span>2023 – Present</span></h5>
+                            </summary>
+                            <div class="detail-contents">
+                                <section>
+                                    <u><span class="company_name">Protexxa Barbados Inc</span></u>
+                               
+                                    <p>
+                                        <h6>Duties</h6> 
+                                    
+                                        
+                                            <div>ETL procedures for a cutting-edge cyber security platform.</div>
+                                            <div>Juggled AWS services like S3, EC2, EMR, and RDS with flair.</div>
+                                            <div>Architected data warehousing solutions using AWS Glue, Redshift, and friends.</div>
+                                            <div>Troubleshooter extraordinaire, ensuring data pipeline integrity.</div>
+                                            <div>Collaborated cross-functionally to design efficient data models.</div>
+                                            <div>Explored and integrated Machine Learning models to enhance data analytics.</div>
+                                        
+                                        
+                                        <h6>Outcomes</h6> 
+                                    </p>
+                                        
+                                  
+
+                                </section>
+                            </div>
+                        </details>
+                        <details>
+                            <summary>
+                                <h5>Network Administrator &amp; QA Analyst <span>2019 – 2023</span></h5>
+                            </summary>
+                            <div class="detail-contents">
+                                <section>
+
+                                    <u><b>Candrug International Ltd</b></u>
+                               
+                               <p>
+                                    <h6>Duties</h6> 
+                                        <ul>
+                                        <div>Masterminded ETL procedures for a cutting-edge cyber security platform.</div>
+                                        <div>Juggled AWS services like S3, EC2, EMR, and RDS with flair.</div>
+                                        <div>Architected data warehousing solutions using AWS Glue, Redshift, and friends.</div>
+                                        <div>Troubleshooter extraordinaire, ensuring data pipeline integrity.</div>
+                                        <div>Collaborated cross-functionally to design efficient data models.</div>
+                                        <div>Explored and integrated Machine Learning models to enhance data analytics.</div>
+                                        </ul>
+                             
+                                 Outcomes
+                                 <ul>
+                                     <div></div>
+                                     <div></div>
+                                     <div></div>
+                                 </ul> 
+                               </p>
+                                  
+
+                                </section>
+                            </div>
+                        </details>
+                        <details>
+                            <summary>
+                                <h5>Web Developer &amp; Network Administrator <span>2017 – 2019</span></h5>
+                            </summary>
+                            <div class="detail-contents">Candrug International Ltd</div>
+                        </details>
+                        <details>
+                            <summary>
+                                <h5>Information Technology Coordinator &amp; Research Co-Supervisor <span>2015 – 2017</span></h5>
+                            </summary>
+                            <div class="detail-contents">The Substance Abuse Foundation Inc.</div>
+                        </details>
+                        <details>
+                            <summary>
+                                <h5>Information Technology Coordinator <span>2013 – 2015</span></h5>
+                            </summary>
+                            <div class="detail-contents">The Substance Abuse Foundation Inc.</div>
+                        </details>
