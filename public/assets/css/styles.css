@@ -73,8 +73,8 @@ details > div.detail-contents {
         }
         .profile, .contact, .skills {
             background-color: #fff;
-            padding: 20px;
-            margin: 10px;
+            /* padding: 20px;
+            margin: 10px; */
             border-radius: 5px;
            /* box-shadow: 0 0 10px rgba(0,0,0,0.1); */
         }
@@ -226,7 +226,7 @@ div#screen { outline: 1px solid #1F85DE; padding: 1em; margin: 1em auto; width: 
 @media only screen and (min-width: 320px) and (max-width: 479px){
     div#region-1 span { margin: 0px; }
     div#region-header a { width: 56%; }
-    span#content { padding-top: 2em; text-align: center; width: 100%; }
+    span#content { padding: 2em 0em; text-align: center; width: 100%; }
      section#profile-image { padding-bottom: 0em; margin-top: 1.8em; } 
      section#profile-image img { display: block; margin: 0 auto; width: 206px; height: 206px; border: 2px solid #ccc;  border-radius: 50%; } 
      div.space { padding: 1em; } 
@@ -249,7 +249,7 @@ div#screen { outline: 1px solid #1F85DE; padding: 1em; margin: 1em auto; width: 
      section#profile-image img { display: block; margin: 0 auto; width: 204px; height: 204px; border-radius: 50%; } 
      section#logo img { width: 4%; display: block; margin: 0 auto; }
      div#region-header a { text-decoration: none; text-align: center; width: 24%; display: block; outline: 0px solid #000; margin: 2em auto; }
-     span#content { padding: 2.8em 0em; width: 60%; margin: 0 auto; }
+     span#content { padding: 2.8em 0em; width: 86%; margin: 0 auto; }
      div.footer-area { width: 60%; margin: 0 auto; }
      section#logo img { width: 10%; display: block; margin: 0 auto; }
 

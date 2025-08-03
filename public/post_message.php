@@ -3,10 +3,6 @@ require_once "./assets/classes/DB_Lite.php";
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST'){
 
-    // $email = $_POST['email'] ?? "";
-    // $topic = $_POST['topic'] ?? "";
-    // $message = $_POST['message'] ?? "";
-
     $msgRec = [ 
        "email" => $_POST['email'] ?? "",
        "topic" => $_POST['topic'] ?? "",

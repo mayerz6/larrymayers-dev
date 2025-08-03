@@ -7,12 +7,14 @@ export class Links {
         this.aboutLink = document.getElementById('about');
         this.expertLink = document.getElementById('expert');
         this.contactLink = document.getElementById('contact');  
-        this.resumeLink = document.getElementById('resume'); // New resume link
+        this.resumeLink = document.getElementById('resume'); 
+        this.messagesLink = document.getElementById('messages'); 
 
         this.contactLink.addEventListener("click", this.clickContactHandler.bind(this));
         this.aboutLink.addEventListener("click", this.clickAboutHandler.bind(this));
         this.expertLink.addEventListener("click", this.clickExpertiseHandler.bind(this));
-        this.resumeLink.addEventListener("click", this.clickResumeHandler.bind(this)); // New handler for resume
+        this.resumeLink.addEventListener("click", this.clickResumeHandler.bind(this)); 
+        this.messagesLink.addEventListener("click", this.clickMessagesHandler.bind(this)); 
     }
 
     clickAboutHandler() {
@@ -45,6 +47,14 @@ export class Links {
         document.getElementById('content').style = "border-top: 20px solid #00b300;";
     }
 
+    clickMessagesHandler() {
+        this.loadContent('./assets/regions/content/messages.html', 'messages', () => {
+            import('./messages.js').then(mod => mod.loadMessagesAdminView());
+        });
+        this.updateStyles('messages', 'active-messages');
+        document.getElementById('content').style = "border-top: 20px solid #a020f0;";
+    }
+    
     
 // this.loadContent('./assets/regions/content/blog.html', 'blog');
 
