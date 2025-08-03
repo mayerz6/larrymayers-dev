@@ -9,49 +9,48 @@ export function loadMessagesAdminView(){
                 return;
             }
 
-            const table = document.createElement("table");
-            table.classList.add("msg-table");
-            table.innerHTML = `
-                <thead>
-                    <tr>
-                        <th>Email</th>
-                        <th>Topic</th>
-                        <th>Message</th>
-                        <th>Date</th>
-                        <th>Action</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    ${data.map(msg => `
-                        <tr data-id="${msg.id}">
-                            <td>${msg.email}</td>
-                            <td>${msg.topic}</td>
-                            <td>${msg.message}</td>
-                            <td>${msg.created_at}</td>
-                            <td><button class="delete-btn">🗑️ Delete</button></td>
-                        </tr>
-                        `).join("")}
-                </tbody>
-            `;
-            container.innerHTML = "";
-            container.appendChild(table);
+            const section = document.createElement("section");
+            section.classList.add("message-container");
 
-            table.querySelectorAll(".delete-btn").forEach(button => {
+            data.forEach(msg => {
+                const card = document.createElement("div");
+                card.classList.add("message-card");
+                card.dataset.id = msg.id;
+
+                card.innerHTML = `
+                    <div class="card-header">
+                        <strong>${msg.email}</strong> <span>${msg.created_at}</span>
+                    </div>
+                    <div class="card-topic">${msg.topic}</div>
+                    <div class="card-body">${msg.message}</div>
+                    <div class="card-actions">
+                        <button class="delete-btn">🗑️ Delete</button>
+                    </div>
+                `;
+
+                section.appendChild(card);
+            });
+
+            container.innerHTML = "";
+            container.appendChild(section);
+
+            section.querySelectorAll(".delete-btn").forEach(button => {
                 button.addEventListener("click", function () {
-                    const row = this.closest("tr");
-                    const id = row.dataset.id;
+                    const card = this.closest(".message-card");
+                    const id = card.dataset.id;
+            
                     if (confirm("Are you sure you want to delete this message?")) {
                         fetch("delete_message.php", {
                             method: "POST",
                             headers: {
                                 "Content-Type": "application/x-www-form-urlencoded"
                             },
-                            body: `id=${id}`
+                            body: `id=${encodeURIComponent(id)}`
                         })
                         .then(res => res.text())
                         .then(result => {
                             console.log(result);
-                            row.remove();
+                            card.remove(); // Remove the card instead of table row
                         })
                         .catch(err => console.error("Delete failed", err));
                     }

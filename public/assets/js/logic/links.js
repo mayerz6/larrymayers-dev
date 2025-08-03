@@ -52,7 +52,7 @@ export class Links {
             import('./messages.js').then(mod => mod.loadMessagesAdminView());
         });
         this.updateStyles('messages', 'active-messages');
-        document.getElementById('content').style = "border-top: 20px solid #a020f0;";
+        document.getElementById('content').style = "border-top: 20px solid #535e63;";
     }
     
     

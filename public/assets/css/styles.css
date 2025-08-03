@@ -93,8 +93,9 @@ details > div.detail-contents {
         .profile h1 {
             margin: 0;
         }
-        .profile h2 {
+        .profile h2, section#messages h2 {
             margin: 10px 0;
+            text-align: center;
             color: #888;
         }
         .profile div.detail-contents {
@@ -194,6 +195,7 @@ div#region-1 span#about:hover { background-color: #ff9300; }
 div#region-1 span#contact:hover { background-color: #d40e3f; }
 div#region-1 span#expert:hover { background-color: #1F85DE; }
 div#region-1 span#resume:hover { background-color: #4CAF50; }
+div#region-1 span#messages:hover { background-color: #535e63; }
 /* Active state styles */
 div#region-1 span.active {
     color: #777; 
@@ -222,11 +224,65 @@ div.form-row { outline: 1px solid #000; margin-bottom: 1.8em; }
 
 div#screen { outline: 1px solid #1F85DE; padding: 1em; margin: 1em auto; width: 960px; }
 
+.message-container {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    padding: 1rem;
+}
+
+.message-card {
+    background-color: #fff;
+    border-left: 4px solid #535e63;
+    border-radius: 8px;
+    padding: 1rem;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+}
+
+.card-header {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.9rem;
+    color: #555;
+    margin-bottom: 0.5rem;
+}
+
+.card-topic {
+    font-weight: bold;
+    color: #333;
+    margin-bottom: 0.5rem;
+}
+
+.card-body {
+    font-size: 0.95rem;
+    color: #222;
+    margin-bottom: 0.75rem;
+    white-space: pre-wrap;
+    word-wrap: break-word;
+}
+
+.card-actions {
+    text-align: right;
+}
+
+.delete-btn {
+    background-color: #ff4d4f;
+    color: #fff;
+    border: none;
+    padding: 0.4rem 0.8rem;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.delete-btn:hover {
+    background-color: #d9363e;
+}
+
 /* Mobile Portrait Screen Sizes */
 @media only screen and (min-width: 320px) and (max-width: 479px){
     div#region-1 span { margin: 0px; }
     div#region-header a { width: 56%; }
-    span#content { padding: 2em 0em; text-align: center; width: 100%; }
+    span#content { padding: 2em .7em; text-align: center; }
      section#profile-image { padding-bottom: 0em; margin-top: 1.8em; } 
      section#profile-image img { display: block; margin: 0 auto; width: 206px; height: 206px; border: 2px solid #ccc;  border-radius: 50%; } 
      div.space { padding: 1em; } 

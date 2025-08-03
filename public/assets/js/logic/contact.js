@@ -128,10 +128,10 @@ this.btnSubmit.addEventListener("click", (e) => {
 async subMsg(){
     /* Must validate the user input before processing. */
     if(this.emailValid && this.msgValid && this.topicValid){
-        
+
         const data = {
             email: this.emailInput.value.trim(),
-            topic: this.msgTopic.value.trim(),
+            topic: this.msgTopic.options[this.msgTopic.selectedIndex].text.trim(),
             message: this.usrMsg.value.trim()
         };
 
