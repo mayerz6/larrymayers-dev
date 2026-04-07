@@ -12,10 +12,6 @@ $request_uri = $_SERVER['REQUEST_URI'];
 $request_method = $_SERVER['REQUEST_METHOD'] ?? 'GET';
 $request_path = strtok($request_uri, '?'); // Remove query string
 
-// $request_path = parse_url($request_uri, PHP_URL_PATH);
-// $request_path = rtrim($request_uri, '/'); // Remove trailing slash for consistency
-// $request_path = explode('/', $request_path);
-
 
 $full_key = "{$request_method} {$request_path}";
 // echo $full_key; // Debugging output
@@ -67,21 +63,6 @@ function loadContent(array $routeDef, array $params):void {
     }
 }
 
-// if ($request_method === 'GET' && $request_path === '/') {
-//     echo 'Home Page';
-// } elseif ($request_method === 'GET' && $request_path === '/index.php') {
-//     echo 'Home Page';
-// } else {
-//     http_response_code(404);
-//     echo json_encode(["message" => "Endpoint not found"]);
-// }
-
-// if(is_callable($handler_func)){
-//     $handler_func(...$handler_args);
-// } else {
-//     http_response_code(500);
-//     echo "Handler function {$handler_func} not found";
-// }
 
 run($routes, $request_path, $request_method);
 
