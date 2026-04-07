@@ -19,13 +19,8 @@ $full_key = "{$request_method} {$request_path}";
 if($request_method === 'POST'){
     $override = $_POST['_method'] ?? $_SERVER['HTTP_X_HTTP_METHOD_OVERRIDE'] ?? null;
     if(is_string($override) && $override !== ''){
-        // $full_key = "{$override} {$request_path}";
         $request_method = strtoupper($override);
     }
-    // Handle POST request logic here
-    // echo "Received a POST request to {$request_path}";
-    // You can add more specific handling based on the path if needed
-    // exit;
 }
 
 
@@ -42,12 +37,6 @@ function run(array $routes, string $request, string $method):void{
     }
 
     loadContent($handler_info, $handler_args);
-    // if(is_callable($handler_func)){
-    //     $handler_func(...$handler_args);
-    // } else {
-    //     http_response_code(500);
-    //     echo "Handler function {$handler_func} not found";
-    // }
 }
 
 function loadContent(array $routeDef, array $params):void {
@@ -62,7 +51,6 @@ function loadContent(array $routeDef, array $params):void {
         echo "Handler function {$handler_func} not found";
     }
 }
-
 
 run($routes, $request_path, $request_method);
 

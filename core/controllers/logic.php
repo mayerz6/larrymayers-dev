@@ -2,10 +2,31 @@
 
 function view(string $view_name, array $data = []):void{
     extract($data, EXTR_SKIP);
-    require_once __DIR__ . "/../templates/regions/header.php";
-    require_once __DIR__ . "/../templates/regions/header-nav.php";
+
+    $isAjax = !empty($_SERVER['HTTP_X_REQUESTED_WITH']) && strtolower($_SERVER['HTTP_X_REQUESTED_WITH']) === 'xmlhttprequest';
+
+    if(!$isAjax){
+        header('Content-Type: application/json');
+        require_once __DIR__ . "/../templates/regions/header.php";
+        require_once __DIR__ . "/../templates/regions/header-nav.php";
+        // echo json_encode($data);
+        // return;
+    }   
+  
     require_once __DIR__ . "/../templates/{$view_name}.php";
-    require_once __DIR__ . "/../templates/regions/footer.php";
+
+    if($isAjax){
+        header('Content-Type: application/json');
+        require_once __DIR__ . "/../templates/regions/footer.php";
+        // echo json_encode($data);
+        // return;
+    }
+
+
+    // require_once __DIR__ . "/../templates/regions/header.php";
+    // require_once __DIR__ . "/../templates/regions/header-nav.php";
+    // require_once __DIR__ . "/../templates/regions/footer.php";
+    
 }
 
 
