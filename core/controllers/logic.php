@@ -5,38 +5,39 @@ function view(string $view_name, array $data = []):void{
 
     $isAjax = !empty($_SERVER['HTTP_X_REQUESTED_WITH']) && strtolower($_SERVER['HTTP_X_REQUESTED_WITH']) === 'xmlhttprequest';
 
-    if(!$isAjax){
+     if($isAjax){
+            require __DIR__ . "/../templates/{$view_name}.php";
+                return;
+            }
         // header('Content-Type: application/json');
-        require_once __DIR__ . "/../templates/regions/header.php";
-        require_once __DIR__ . "/../templates/regions/header-nav.php";
-        // echo json_encode($data);
-        // return;
-    }   
-  
-    require_once __DIR__ . "/../templates/{$view_name}.php";
+        require __DIR__ . "/../templates/regions/header.php";
+        require __DIR__ . "/../templates/regions/header-nav.php";
+        
+        // echo '<div id="app">';
+            require __DIR__ . "/../templates/{$view_name}.php";
+        // echo '</div>';
+        
+        require __DIR__ . "/../templates/regions/footer.php";
+        
+       
 
-    if($isAjax){
-        // header('Content-Type: application/json');
-        require_once __DIR__ . "/../templates/regions/footer.php";
-        // echo json_encode($data);
-        // return;
-    }
-
-
+}
+    
     // require_once __DIR__ . "/../templates/regions/header.php";
     // require_once __DIR__ . "/../templates/regions/header-nav.php";
     // require_once __DIR__ . "/../templates/regions/footer.php";
     
-}
-
 
 function home():void {
+    // echo "<h1>Welcome to my portfolio!</h1>";
     view('home');
 }
 function about():void {
+    echo "<h1>About My Career!</h1>";
     view('about');
 }
 function contact():void {
+    echo "<h1>Contact Me!</h1>";
     view('contact');
 }
 
@@ -63,6 +64,7 @@ function contactPost():void {
     }
 }
 function projects():void {
+    echo "<h1>Ongoing Projects!</h1>";
     view('projects');
 }
 
