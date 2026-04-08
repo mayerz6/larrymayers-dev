@@ -14,6 +14,7 @@
         <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
         <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
         <script src="./assets/js/script.js" defer></script>
+        <script src="./assets/js/app.js" defer></script>
     </head>
 
     <body></body>

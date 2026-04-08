@@ -45,7 +45,7 @@ function loadContent(array $routeDef, array $params):void {
 
     if(is_callable($handler_func)){
         // $handler_func(...$handler_args);
-        $handler_func($params);
+        $handler_func(...$handler_args);
     } else {
         http_response_code(500);
         echo "Handler function {$handler_func} not found";
