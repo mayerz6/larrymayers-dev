@@ -13,9 +13,7 @@ function view(string $view_name, array $data = []):void{
         require __DIR__ . "/../templates/regions/header.php";
         require __DIR__ . "/../templates/regions/header-nav.php";
         
-        // echo '<div id="app">';
             require __DIR__ . "/../templates/{$view_name}.php";
-        // echo '</div>';
         
         require __DIR__ . "/../templates/regions/footer.php";
         
@@ -23,48 +21,71 @@ function view(string $view_name, array $data = []):void{
 
 }
     
-    // require_once __DIR__ . "/../templates/regions/header.php";
-    // require_once __DIR__ . "/../templates/regions/header-nav.php";
-    // require_once __DIR__ . "/../templates/regions/footer.php";
-    
-
 function home():void {
-    // echo "<h1>Welcome to my portfolio!</h1>";
     view('home');
 }
 function about():void {
-    echo "<h1>About My Career!</h1>";
     view('about');
 }
 function contact():void {
-    echo "<h1>Contact Me!</h1>";
     view('contact');
 }
 
 function contactPost():void {
     // Handle form submission logic here
     // For example, you could validate the input and send an email
-    if(($_SERVER['CONTENT_TYPE'] ?? '') === 'application/x-www-form-urlencoded'){
-        $name = $_POST['name'] ?? '';
-        $email = $_POST['email'] ?? '';
-        $message = $_POST['message'] ?? '';
+    // if(($_SERVER['CONTENT_TYPE'] ?? '') === 'application/x-www-form-urlencoded'){
+        header('Content-Type: application/json');
+
+        $name = trim($_POST['name'] ?? '');
+        $email = trim($_POST['email'] ?? '');
+        $message = trim($_POST['message'] ?? '');
 
         // Basic FORM validation
         if ($name && $email && $message) {
-            // Here you would typically send the email or save the message to a database
-            // For demonstration, we'll just return a success message
-            echo json_encode(["message" => "Thank you for your message, {$name}!"]);
-        } else {
+
+            try {
+                    $conn = Database::getLiteConnection();
+                    Database::createMsgTable($conn);
+
+                    $stmt = $conn->prepare("INSERT INTO messages (name, email, message) VALUES (:name, :email, :message)");
+                    
+                    $stmt->bindParam(':name', $name);
+                    $stmt->bindParam(':email', $email);
+                    $stmt->bindParam(':message', $message);
+                    $stmt->execute();
+
+                    // Here you would typically send the email or save the message to a database For demonstration, we'll just return a success message
+                    echo json_encode([
+                        "status" => "success",
+                        "message" => "Thank you for your message, {$name}!"]);
+            
+                }catch(Exception $e) {
+                        http_response_code(500);
+                        echo json_encode([
+                            "status" => "error",
+                            "message" => "An error occurred while processing your message. Please try again later."
+                        ]);
+                        exit;
+                    }
+
+       } else {
             http_response_code(400);
-            echo json_encode(["message" => "All fields are required."]);
+            echo json_encode([
+                "status" => "error",
+                "message" => "All fields are required."
+            ]);
         }
-    } else {
-        http_response_code(415);
-        echo json_encode(["message" => "Unsupported Media Type."]);
-    }
+    // } else {
+    //     http_response_code(415);
+    //     echo json_encode([
+    //         "status" => "error",
+    //         "message" => "Unsupported content type. Please submit the form with 'application/x-www-form-urlencoded'."
+    //     ]);
+    // }
 }
+
 function projects():void {
-    echo "<h1>Ongoing Projects!</h1>";
     view('projects');
 }
 

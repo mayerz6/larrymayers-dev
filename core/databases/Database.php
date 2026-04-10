@@ -21,13 +21,28 @@ class Database{
     
     public function __construct(){
 
-        self::$host = Secrets::getStageHost();
-        self::$user = Secrets::getDBUser();
-        self::$pwd = Secrets::getPwdStage();
-        self::$db = Secrets::getDBStage();
+        // self::$host = Secrets::getStageHost();
+        // self::$user = Secrets::getDBUser();
+        // self::$pwd = Secrets::getPwdStage();
+        // self::$db = Secrets::getDBStage();
         
         
     }
+
+    public static ?PDO $conn = null;
+
+    public static function getLiteConnection(): PDO {
+        if (self::$conn === null) {
+            try {
+                self::$conn = new PDO("sqlite:" . __DIR__ . "/messages.sqlite");
+                self::$conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+            } catch (PDOException $e) {
+                die(json_encode(["message" => "SQLite connection failed: " . $e->getMessage()]));
+            }
+        }
+        return self::$conn;
+    }
+
 
     public function getConnection(){
 
@@ -42,6 +57,25 @@ class Database{
             die(json_encode(["message" => "Database connection failed: " . $e->getMessage()]));
         }
 
+    }
+
+    public static function createMsgTable(PDO $conn): void {
+        $sql = "CREATE TABLE IF NOT EXISTS messages (
+            id INTEGER PRIMARY KEY AUTOINCREMENT,
+            name TEXT NOT NULL,
+            email TEXT NOT NULL,
+            message TEXT NOT NULL,
+            created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+        )";
+        try {
+            $conn->exec($sql);
+        } catch (PDOException $e) {
+            die(json_encode(["message" => "Failed to create messages table: " . $e->getMessage()]));
+        }
+    }   
+    
+    public static function closeConnection(): void {
+        self::$conn = null;
     }
 
 }
