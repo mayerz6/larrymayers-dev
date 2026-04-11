@@ -52,6 +52,27 @@ document.addEventListener("submit", async (e) => {
 });
 
 
+document.addEventListener("click", async (e) => {
+  if (e.target.matches(".delete-btn")) {
+    const id = e.target.dataset.id;
+
+    const res = await fetch("/messages/delete", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/x-www-form-urlencoded",
+        "X-Requested-With": "XMLHttpRequest"
+      },
+      body: `id=${id}`
+    });
+
+    const data = await res.json();
+
+    if (data.status === "success") {
+      e.target.closest(".message-item").remove();
+    }
+  }
+});
+
 async function navigate(path) {
   try {
     const res = await fetch(path, {

@@ -7,6 +7,7 @@ $routes = [
     'GET /profile' => ['handler' => 'home', 'args' => []],
     'GET /about' => ['handler' => 'about', 'args' => []],
     'GET /messages' => ['handler' => 'messages', 'args' => []],
+    'POST /messages/delete' => ['handler' => 'deleteMessage', 'args' => []],
     'GET /projects' => ['handler' => 'projects', 'args' => []],
     'GET /expertise' => ['handler' => 'expertise', 'args' => []],
     'GET /resume' => ['handler' => 'resume', 'args' => []],
