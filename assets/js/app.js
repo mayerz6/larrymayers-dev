@@ -18,7 +18,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
 document.addEventListener("submit", async (e) => {
     const form = e.target;
-    
 
     if(form.id === "contactForm") {
         e.preventDefault();

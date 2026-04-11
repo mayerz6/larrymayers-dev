@@ -4,3 +4,57 @@ header h1 {
     margin: 0;
     outline: 1px solid #ccc; /* Debugging outline */
 }
+
+.text-success {
+    color: #28a745;
+    font-weight: bolder;
+}
+.text-danger {
+    color: #dc3545;
+    font-weight: bolder;
+}
+
+div#app {
+    margin-top: 20px;
+    padding: 20px;
+    background-color: #f9f9f9;
+    border: 1px solid #1a1818;
+    border-radius: 5px;
+}
+
+.message-list {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.message-item {
+  padding: 16px;
+  margin: 8px 0;
+  border-radius: 12px;
+  background: #f9f9f9;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+}
+
+.message-header {
+  display: flex;
+  justify-content: space-between;
+  font-size: 14px;
+  margin-bottom: 8px;
+}
+
+.message-header .email {
+  color: #aaa;
+  font-size: 12px;
+}
+
+.message-body {
+  font-size: 14px;
+  line-height: 1.5;
+  margin-bottom: 8px;
+}
+
+.message-footer {
+  font-size: 11px;
+  color: #777;
+}

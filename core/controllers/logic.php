@@ -55,7 +55,6 @@ function contactPost():void {
                     $stmt->bindParam(':message', $message);
                     $stmt->execute();
 
-                    // Here you would typically send the email or save the message to a database For demonstration, we'll just return a success message
                     echo json_encode([
                         "status" => "success",
                         "message" => "Thank you for your message, {$name}!"]);
@@ -76,13 +75,14 @@ function contactPost():void {
                 "message" => "All fields are required."
             ]);
         }
-    // } else {
-    //     http_response_code(415);
-    //     echo json_encode([
-    //         "status" => "error",
-    //         "message" => "Unsupported content type. Please submit the form with 'application/x-www-form-urlencoded'."
-    //     ]);
-    // }
+}
+
+function messages(): void {
+    $conn = Database::getLiteConnection();
+    $stmt = $conn->query("SELECT id, name, email, message, created_at FROM messages ORDER BY created_at DESC");
+    $messages = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+    view('messages', ['messages' => $messages]);
 }
 
 function projects():void {
