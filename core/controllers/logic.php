@@ -17,10 +17,18 @@ function view(string $view_name, array $data = []):void{
         
         require __DIR__ . "/../templates/regions/footer.php";
         
-       
-
 }
     
+
+function requireAuth(): void {
+    session_start();
+    if (!isset($_SESSION['user_id'])) {
+        header('Location: /login');
+        exit;
+    }
+}
+
+
 function home():void {
     view('home');
 }
@@ -31,6 +39,10 @@ function contact():void {
     view('contact');
 }
 
+function dashboard(): void {
+    requireAuth();
+    view('dashboard');
+}
 function contactPost():void {
     // Handle form submission logic here
     // For example, you could validate the input and send an email
@@ -85,6 +97,58 @@ function messages(): void {
     view('messages', ['messages' => $messages]);
 }
 
+function login(): void {
+    $db = Database::getLiteConnection();
+    Database::createUsersTable($db);
+    // Database::insertDefaultUser($db);
+    view('login');
+}   
+
+function loginPost(): void {
+    session_start();
+    header('Content-Type: application/json');
+
+    $email = trim($_POST['email'] ?? '');
+    $password = trim($_POST['password'] ?? '');
+
+    $db = Database::getLiteConnection();
+    $stmt = $db->prepare("SELECT id, email, password_hash FROM users WHERE email = :email");
+    $stmt->bindParam(':email', $email);
+
+    $stmt->execute();
+    $user = $stmt->fetch(PDO::FETCH_ASSOC);
+
+    if ($user && password_verify($password, $user['password_hash'])) {
+        $_SESSION['user_id'] = $user['id'];
+        $_SESSION['email'] = $user['email'];
+        echo json_encode([
+            "status" => "success",
+            "message" => "Login successful.",
+            "redirect" => "/dashboard"
+        ]);
+    } else {
+        http_response_code(401);
+        echo json_encode([
+            "status" => "error",
+            "message" => "Invalid credentials."
+        ]);
+    }
+}
+
+function resume(): void {
+    $conn = Database::getLiteConnection();
+    $stmt = $conn->query("SELECT id, title, company, summary, start_year, end_year FROM resume ORDER BY created_at DESC");
+    $resumes = $stmt->fetchAll(PDO::FETCH_ASSOC);
+    view('resume', ['resumes' => $resumes]);
+}
+
+function blog(): void {
+    $conn = Database::getLiteConnection();
+    $stmt = $conn->query("SELECT id, title, content, created_at FROM blog_posts ORDER BY created_at DESC");
+    $posts = $stmt->fetchAll(PDO::FETCH_ASSOC);
+    view('blog', ['posts' => $posts]);
+}
+
 function deleteMessage(): void {
     header('Content-Type: application/json');
 
@@ -123,8 +187,4 @@ function projects():void {
 
 function expertise():void {
     view('expertise');
-}
-
-function resume():void {
-    view('resume');
 }
