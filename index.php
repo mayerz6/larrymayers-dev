@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 include_once "./core/databases/Database.php";
 include_once "./core/security/Secrets.php";    
-include_once "./core/databases/messages.sqlite";    
+// include_once "./core/databases/messages.sqlite";    
 include_once "./core/controllers/routes.php";
 include_once "./core/controllers/logic.php";
 

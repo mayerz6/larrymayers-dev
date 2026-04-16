@@ -10,6 +10,7 @@
                         <li><a href="contact">Contact</a></li>
                         <li><a href="expertise">Expertise</a></li>
                         <li><a href="resume">Resume</a></li>
+                        <li><a href="messages">Messages</a></li>
                     </ul>
                 </nav>
             </div>
