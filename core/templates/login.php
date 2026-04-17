@@ -17,4 +17,5 @@
     </div>
     <button type="submit">Login</button>
     </fieldset> 
+    <div id="loginResMsg" class="text-small mt-2"></div>
 </form>

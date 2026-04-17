@@ -51,6 +51,92 @@ document.addEventListener("submit", async (e) => {
     }
 });
 
+document.addEventListener("submit", async (e) => {
+    const form = e.target;
+    if(form.id === "loginForm") {
+        e.preventDefault();
+        const formData = new FormData(form);
+        const resMsg = document.getElementById("loginResMsg");
+
+
+        try{
+            const res = await fetch("/login", {
+                method: "POST",
+                headers: {
+                    "X-Requested-With": "XMLHttpRequest"
+                },
+                body: formData
+            });
+
+            const data = await res.json();
+          
+            if(data.status === "success") {
+                resMsg.className = "text-success";
+                resMsg.textContent = data.message;
+                
+                setTimeout(() => {
+                    navigate(data.redirect);
+                }, 500);
+            } else {
+                resMsg.className = "text-danger";
+                resMsg.textContent = data.message;
+            }
+            
+        } catch(err) {
+            console.error("Form submission failed:", err);
+        }
+    }
+});
+
+
+document.addEventListener("submit", async (e) => {
+    const form = e.target;
+    if (form.id === "resumeForm") {
+        e.preventDefault();
+        const formData = new FormData(form);
+        const resMsg = document.getElementById("resumeResMsg");
+
+        try {
+            const res = await fetch("/resume/create", {
+                method: "POST",
+                headers: {
+                    "X-Requested-With": "XMLHttpRequest"
+                },
+                body: formData
+            });
+
+            const data = await res.json();
+            if(data.status === "success") {
+                resMsg.className = "text-success";
+                resMsg.textContent = data.message;
+                form.reset();
+                // location.reload();
+                refreshResumeList();
+
+            } else {
+                resMsg.className = "text-danger";
+                resMsg.textContent = data.message;
+            }
+            
+        } catch(err) {
+            console.error("Form submission failed:", err);
+        }
+    }
+
+});
+
+async function refreshResumeList() {
+    const res = await navigate("/resume/manage", {
+        headers: {
+            "X-Requested-With": "XMLHttpRequest"
+        }
+    });
+
+    const html = await res.text();
+
+    document.getElementById("resume-manage").innerHTML = html;
+}
+
 
 document.addEventListener("click", async (e) => {
   if (e.target.matches(".delete-btn")) {
