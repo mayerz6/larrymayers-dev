@@ -140,12 +140,43 @@ function loginPost(): void {
     }
 }
 
+function logoutPost(): void {
+    session_start();
+    session_unset();
+    $_SESSION = [];
+    session_destroy();
+
+    // If AJAX request → return JSON
+    $isAjax = !empty($_SERVER['HTTP_X_REQUESTED_WITH']) &&
+              strtolower($_SERVER['HTTP_X_REQUESTED_WITH']) === 'xmlhttprequest';
+    if ($isAjax) {
+        header('Content-Type: application/json');
+        echo json_encode([
+            "status" => "success",
+            "message" => "Logged out successfully.",
+            "redirect" => "/"
+        ]);
+        return;
+    }
+
+    header('Location: /');
+    exit();
+}
+
 function resume(): void {
-    // $conn = Database::getLiteConnection();
-    // $stmt = $conn->query("SELECT id, title, company, summary, start_year, end_year FROM resume ORDER BY created_at DESC");
-    // $resumes = $stmt->fetchAll(PDO::FETCH_ASSOC);
-    // view('resume', ['resumes' => $resumes]);
-    view('resume');
+    $conn = Database::getLiteConnection();
+
+    $stmt = $conn->query("SELECT id, title, company, summary, start_year, end_year FROM resume ORDER BY created_at ASC");
+    $resumes = $stmt->fetchAll(PDO::FETCH_ASSOC);
+    $stmt = $conn->query("SELECT id, resume_id, duty, order_index FROM duties ORDER BY created_at ASC");
+    $duties = $stmt->fetchAll(PDO::FETCH_ASSOC);    
+
+    $dutiesMap = [];
+    foreach ($duties as $duty) {
+        $dutiesMap[$duty['resume_id']][] = $duty;
+    }
+
+    view('resume', ['resumes' => $resumes, 'duties' => $dutiesMap]);
 }
 
 function resumeManage(): void {
@@ -232,6 +263,64 @@ function resumeCreate(): void {
     }
 }
 
+function resumeDelete(): void {
+    session_start();
+    requireAuth();
+    header('Content-Type: application/json');
+
+    $id = $_POST['id'] ?? null;
+
+    if (!$id) {
+        http_response_code(400);
+        echo json_encode(["status" => "error", "message" => "Missing ID"]);
+        return;
+    }
+
+    $db = Database::getLiteConnection();
+
+    try {
+        $stmt = $db->prepare("DELETE FROM resume WHERE id = ?");
+        $stmt->execute([$id]);
+
+        echo json_encode(["status" => "success"]);
+
+    } catch (Exception $e) {
+        http_response_code(500);
+        echo json_encode(["status" => "error"]);
+    }
+}
+
+function resumeUpdate(): void {
+    session_start();
+    requireAuth();
+    header('Content-Type: application/json');
+
+    $id = $_POST['id'] ?? null;
+    $title = trim($_POST['title'] ?? '');
+    $company = trim($_POST['company'] ?? '');
+    $summary = trim($_POST['summary'] ?? '');
+    $start = trim($_POST['start_year'] ?? '');
+    $end = trim($_POST['end_year'] ?? '');
+    $dutiesRaw = trim($_POST['duties'] ?? '');
+
+    if (!$id || !$title) {
+        http_response_code(400);
+        echo json_encode(["status" => "error"]);
+        return;
+    }
+
+    $db = Database::getLiteConnection();
+
+    $stmt = $db->prepare("
+        UPDATE resume
+        SET title = ?
+        WHERE id = ?
+    ");
+
+    $stmt->execute([$title, $id]);
+
+    echo json_encode(["status" => "success"]);
+}
 
 function blog(): void {
     $conn = Database::getLiteConnection();

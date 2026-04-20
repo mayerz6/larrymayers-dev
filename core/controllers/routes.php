@@ -13,11 +13,14 @@ $routes = [
     'GET /resume' => ['handler' => 'resume', 'args' => []],
     'GET /resume/manage' => ['handler' => 'resumeManage', 'args' => []],
     'POST /resume/create' => ['handler' => 'resumeCreate', 'args' => []],
+    'POST /resume/update' => ['handler' => 'resumeUpdate', 'args' => []],
+    'POST /resume/delete' => ['handler' => 'resumeDelete', 'args' => []],
     'GET /contact' => ['handler' => 'contact', 'args' => []],
     'POST /contact' => ['handler' => 'contactPost', 'args' => []],
     'GET /login' => ['handler' => 'login', 'args' => []],
     'GET /dashboard' => ['handler' => 'dashboard', 'args' => []],
     'POST /login' => ['handler' => 'loginPost', 'args' => []],
+    'POST /logout' => ['handler' => 'logoutPost', 'args' => []],
     'GET /blog' => ['handler' => 'blog', 'args' => []],
     // Add more routes here as needed
 ];

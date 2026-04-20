@@ -51,7 +51,7 @@
                 <h3>Existing Resume Entries</h3>
                 <ol class="resume-list">
                     <?php foreach ($resumes as $resume): ?>
-                        <li class="resume-item">
+                        <li class="resume-item" datat-id="<?= $resume['id'] ?>">
                             <h4><?php echo htmlspecialchars($resume['title']); ?> at <?php echo htmlspecialchars($resume['company']); ?></h4>
                             <p><?php echo nl2br(htmlspecialchars($resume['summary'])); ?></p>
                             <p><strong>Duration:</strong> <?php echo htmlspecialchars($resume['start_year']); ?> - <?php echo htmlspecialchars($resume['end_year']); ?></p>

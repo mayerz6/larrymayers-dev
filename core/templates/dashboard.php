@@ -12,8 +12,8 @@ Your secure account dashboard is ready to help manage your profile, view message
 <ul>
     <li><a href="/profile/manage">Edit Profile</a></li>
     <li><a href="/messages">View Messages</a></li>
-    <li><a href="/projects/manage">Manage Projects</a></li>
-    <li><a href="/expertise/manage">Update Expertise</a></li>
+    <!-- <li><a href="/projects/manage">Manage Projects</a></li> -->
+    <!-- <li><a href="/expertise/manage">Update Expertise</a></li> -->
     <li><a href="/resume/manage">Edit Resume</a></li>
     <!-- Add more dashboard links as needed -->
 </ul>

@@ -1,28 +1,32 @@
 <?php ?>
 
         <main>
-            <section id="about">
-                <div class="container">
-                     <h1>Projects Catalog</h1>
-                     <p><small>Personal Message Innovate... every day!</small></p>
-                     <p>Do you want to be inspired? Learn to love learning and growth. The more effort you put into improving your skills, the more accomplished you'll feel about each progressive milestone.</p>
-                </div>
-            </section>
-
-            <section id="projects">
-                <div class="container">
-                    <h2>Projects</h2>
-                    <!-- Project cards will go here -->
-                     <p><small>Some of my credentials</small></p>
-                     <p>A solutions-focused professional; offering 8 years of hands-on experience spanning web applications development, network administration and social media management. Proven track record of maintaining up-to-date, secure and highly available networks. Expertly managed business critical data; whilst ensuring security and integrity. Forward thinking pioneer; who maintains awareness of current landscape of the ICT spectrum.</p>
-                </div>
-            </section>
-
-            <section id="contact">
-                <div class="container">
-                    <h2>Contact Me</h2>
-                    <!-- Contact form will go here -->
-                </div>
+            <section id="resumeList">
+                <?php if (!empty($resumes) && !empty($duties)): ?>
+                    <div class="container">
+                        <h2>Resume/Projects Catalog</h2>
+                        <ol class="resume-list">
+                            <?php foreach ($resumes as $resume): ?>
+                                <li class="resume-item">
+                                    <h3><?php echo htmlspecialchars($resume['title']); ?> at <?php echo htmlspecialchars($resume['company']); ?></h3>
+                                    <p><?php echo nl2br(htmlspecialchars($resume['summary'])); ?></p>
+                                    <p><strong>Duration:</strong> <?php echo htmlspecialchars($resume['start_year']); ?> - <?php echo htmlspecialchars($resume['end_year']); ?></p>
+                                     <p><strong>Duties:</strong>
+                                    <ul>
+                                        <?php foreach ($duties[$resume['id']] ?? [] as $duty): ?>
+                                            <li><?php echo htmlspecialchars($duty['duty']); ?></li>
+                                        <?php endforeach; ?>
+                                    </ul>
+                                    </p>
+                                </li>
+                            <?php endforeach; ?>
+                        </ol>
+                    </div>
+                <?php else: ?>
+                    <div class="container">
+                        <p>No resume entries found.</p> 
+                    </div>
+                <?php endif; ?>
             </section>
         </main>
 
