@@ -111,7 +111,7 @@ class Database{
             summary TEXT NOT NULL,
             start_year TEXT NOT NULL,
             end_year TEXT,
-            position_order INTEGER NOT NULL,
+            order_index INTEGER NOT NULL,
             created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
         )";
         try {
@@ -151,7 +151,6 @@ class Database{
             die(json_encode(["message" => "Failed to create qualifications table: " . $e->getMessage()]));
         }
     }
-
 
     public static function createUsersTable(PDO $conn): void {
         $sql = "CREATE TABLE IF NOT EXISTS users (
