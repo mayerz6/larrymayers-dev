@@ -223,34 +223,67 @@ async function handleDelete(e) {
     }
 }
 
-// if (e.target.classList.contains("save-edit-btn")) {
-//     const item = e.target.closest(".resume-item");
-//     const id = item.dataset.id;
 
-//     const newTitle = item.querySelector(".edit-title").value;
+async function loadResume() {
+    const resumeContainer = document.querySelector(".accordion");
+    if (!resumeContainer) return;
 
-//     // Optimistic update
-//     item.querySelector("h4").textContent = newTitle;
+    const res = await fetch("/resume", {
+        method: "GET",
+        headers: {
+            "X-Requested-With": "XMLHttpRequest"
+        }
+    });
+    if(!res.ok) {
+        console.error("Failed to fetch resume data");
+        return;
+    }
+    const data = await res.json();
 
-//     try {
-//         const formData = new FormData();
-//         formData.append("id", id);
-//         formData.append("title", newTitle);
+    if (data.status !== "success"){
+        console.error("Failed to fetch resume data");
+        return
+    }
+                data.forEach(position => {
+                const detailsElement = document.createElement("details");
+                const summaryElement = document.createElement("summary");
+                
+                summaryElement.innerHTML = `<h5>${position.title} <span>${position.start_year} - ${position.end_year}</span></h5>`;
+                detailsElement.appendChild(summaryElement);
 
-//         const res = await fetch("/resume/update", {
-//             method: "POST",
-//             headers: { "X-Requested-With": "XMLHttpRequest" },
-//             body: formData
-//         });
+                const detailContents = document.createElement("div");
+                detailContents.className = "detail-contents";
 
-//         const data = await res.json();
+                const companyElement = document.createElement("u");
+                companyElement.innerHTML = `<span class="company_name">${position.company}</span>`;
+                detailContents.appendChild(companyElement);
 
-//         if (data.status !== "success") throw new Error();
+                if (position.duties.length > 0) {
+                    const dutiesElement = document.createElement("p");
+                    const dutiesList = document.createElement("ul");
+                    dutiesElement.innerHTML = "<h6>Duties</h6>";
 
-//     } catch {
-//         alert("Update failed");
-//     }
-// }
+                    position.duties.forEach(duty => {
+                        // const dutyDiv = document.createElement("div");
+                        const dutyListItem = document.createElement("li");
+                        dutyListItem.className = "duty-contents";
+                        dutyListItem.textContent = duty;
+                        // dutiesElement.appendChild(dutyDiv);
+                        dutiesList.appendChild(dutyListItem);
+                    });
+
+                    dutiesElement.appendChild(dutiesList);
+                    detailContents.appendChild(dutiesElement);
+                }
+
+                detailsElement.appendChild(detailContents);
+                resumeContainer.appendChild(detailsElement);
+            });
+    
+}
+
+
+
 async function handleSave(e) {
     const item = e.target.closest(".resume-item");
     const id = item.dataset.id;
