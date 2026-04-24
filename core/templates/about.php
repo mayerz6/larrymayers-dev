@@ -21,7 +21,11 @@
 
             <section id="projects">
                 <div class="container">
-                    <h2>Professional Mission</h2>
+                    <h1>Professional Mission</h1>
+                     <p><small>Building the Future, One Line of Code at a Time.</small></p>
+                     <p>My mission is to create digital solutions that are not only functional but also secure and scalable. 
+                        I am committed to continuous learning and growth, both personally and professionally. 
+                        Whether I am mentoring students or hardening an API, my goal is simple: be better than yesterday's version.</p>
                     <!-- Project cards will go here -->
                      <p><small>Growth is the only constant.</small></p>
                      <p>Real inspiration doesn&rsquo;t come from a single breakthrough; 

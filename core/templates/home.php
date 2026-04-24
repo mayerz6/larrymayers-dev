@@ -4,6 +4,7 @@
         <main>
             <section id="welcome">
                 <div class="container">
+                    
                      <h1>Larry Mayers</h1>
                      <b><small>Engineering Data. Developing the Web....get to know me</small></b>
                      <p>I’m a Data Engineer and Web Developer dedicated to bridging the gap between complex 
