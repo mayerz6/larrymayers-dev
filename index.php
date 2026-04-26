@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 include_once "./core/databases/Database.php";
 include_once "./core/security/Secrets.php";    
-include_once "./core/databases/messages.sqlite";    
+// include_once "./core/databases/messages.sqlite";    
 include_once "./core/controllers/routes.php";
 include_once "./core/controllers/logic.php";
 
@@ -45,7 +45,7 @@ function loadContent(array $routeDef, array $params):void {
 
     if(is_callable($handler_func)){
         // $handler_func(...$handler_args);
-        $handler_func($params);
+        $handler_func(...$handler_args);
     } else {
         http_response_code(500);
         echo "Handler function {$handler_func} not found";

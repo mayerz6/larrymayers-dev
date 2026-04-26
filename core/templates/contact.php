@@ -7,9 +7,9 @@
                 <div class="container">
                     <h2>Contact Me</h2>
                     
-                     <form method="POST">
+                     <form id="contactForm">
                         <fieldset>
-                            <legend>Get in Touch</legend>
+                            <legend>Get in Touch</legend>           
                             <label for="name">Name:</label>
                             <input type="text" id="name" name="name" required>
                             <br>
@@ -25,6 +25,7 @@
                             <button type="submit">Send Message</button>
                         </fieldset>
                     </form>
+                    <div id="formResMsg" class="text-small mt-2"></div>
                 </div>
             </section>
         </main>
