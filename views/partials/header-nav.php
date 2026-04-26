@@ -4,7 +4,8 @@
             <div class="container">
                 <nav class="nav" aria-label="Primary navigation">
                     <a class="brand" href="/profile" aria-label="Larry Mayers home">
-                        <span class="brand-mark">LM</span>
+                        <!-- <span class="brand-mark">LM</span> -->
+                        <span class="brand-mark"><img src="/assets/img/lm-graphic.png" alt="Larry Mayers" width="36" height="36"></span>
                         <span>Larry Mayers</span>
                     </a>
 
