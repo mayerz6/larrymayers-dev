@@ -24,5 +24,9 @@
                 </nav>
             </div>
         </header>
+        
+                <div>
+                <img style="width: 100px; height: auto;" src="./assets/img/lm-graphic.png" alt="Larry Mayers" class="profile-pic">
+                </div>
 
         <div id="app">

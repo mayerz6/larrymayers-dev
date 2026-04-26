@@ -5,6 +5,10 @@ header h1 {
     outline: 1px solid #ccc; /* Debugging outline */
 }
 
+div#app, div#app h1 {
+    color: #333;
+}
+
 .text-success {
     color: #28a745;
     font-weight: bolder;
@@ -13,13 +17,18 @@ header h1 {
     color: #dc3545;
     font-weight: bolder;
 }
-
+div#logo {
+    /* display: flex;
+    justify-content: left;
+    margin: 0px; */
+    background-color: #fff;
+}
 div#app {
-    margin-top: 20px;
+    margin: 0px;
     padding: 20px;
     background-color: #f9f9f9;
-    border: 1px solid #1a1818;
-    border-radius: 5px;
+    border: 0px solid #1a1818;
+    /* border-radius: 5px; */
 }
 
 .message-list {
