@@ -80,4 +80,25 @@ div#app {
     border-bottom: 4px solid #ccc; /* Debugging outline */
  }
 
- details summary h5 { margin: 0;}
+ details summary h5 { margin: 0; }
+
+ #contactForm #name {
+    border: 1px solid #000;
+ }
+ 
+ #contactForm #email {
+    border: 1px solid #000;
+    color: #000;
+ }
+
+
+ #email {
+    border: 1px solid #000;
+    color: #000;
+ }
+
+ #name {
+    border: 1px solid #000;
+    color: #000;
+ }
+ 
