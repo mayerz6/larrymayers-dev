@@ -128,6 +128,23 @@ function resumeDelete(): void {
     }
 }
 
+function resumeEditForm(): void {
+    requireAuth();
+    $id = $_GET['id'] ?? null;
+
+    $db = Database::getLiteConnection();
+
+    $stmt = $db->prepare("SELECT * from resume WHERE id = ?");
+    $stmt->execute([$id]);
+    $resume = $stmt->fetch(PDO::FETCH_ASSOC);
+
+    $stmt = $db->prepare("SELECT * from duties WHERE resume_id = ? ORDER BY order_index ASC");
+    $stmt->execute([$id]);
+    $duties = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+    view('resume-edit', ['resume' => $resume, 'duties' => $duties]);
+}
+
 function resumeUpdate(): void {
     session_start();
     requireAuth();
