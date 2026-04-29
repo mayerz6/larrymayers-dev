@@ -1,6 +1,9 @@
+<main>
+    <section id="messages">
+        <div class="container">
 <div class="card">
     <div class="card-header">
-        <h2>Messages | Backend Inbox</h2>
+        <h1>Messages | Backend Inbox</h1>
         <p class="text-muted"><small>View messages sent through the contact form.</small></p>
         </div>  
 <?php if (empty($messages)): ?>
@@ -24,4 +27,7 @@
         <?php endforeach; ?>
     </div>
 <?php endif; ?>
-</div>  
+        </div>  
+        </div>  
+        </section>
+        </main> 

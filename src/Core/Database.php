@@ -26,8 +26,9 @@ class Database{
     public static function getLiteConnection(): PDO {
         if (self::$conn === null) {
             try {
-                self::$conn = new PDO("sqlite:" . __DIR__ . "/messages.sqlite");
+                self::$conn = new PDO("sqlite:" . __DIR__ . "/../../database/app.sqlite");
                 self::$conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+                self::$conn->exec("PRAGMA foreign_keys = ON");
             } catch (PDOException $e) {
                 die(json_encode(["message" => "SQLite connection failed: " . $e->getMessage()]));
             }
