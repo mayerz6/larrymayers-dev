@@ -5,7 +5,7 @@
         <footer class="site-footer">
             <div class="container footer-inner">
                 <div class="footer-copy">
-                    <span class="footer-label">Available online</span>
+                    <span style="display: none;" class="footer-label">Available online</span>
                     <p>&copy; Copyright <?php echo date("Y"); ?> | Larry Mayers | All rights reserved.</p>
                 </div>
 

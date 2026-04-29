@@ -127,8 +127,11 @@ document.addEventListener("submit", async (e) => {
                 resMsg.className = "text-success";
                 resMsg.textContent = data.message;
                 form.reset();
-                // location.reload();
-                refreshResumeList();
+                if (data.redirect) {
+                    window.location.href = data.redirect;
+                } else {
+                    refreshResumeList();
+                }
 
             } else {
                 resMsg.className = "text-danger";
@@ -191,6 +194,8 @@ document.addEventListener("click", async (e) => {
 });
 
 async function handleDelete(e) {
+    e.preventDefault();
+
     const item = e.target.closest(".resume-item");
     if(!item) return;
     
@@ -301,6 +306,8 @@ async function loadResume() {
 
 
 async function handleSave(e) {
+    e.preventDefault();
+
     const item = e.target.closest(".resume-item");
     const id = item.dataset.id;
     const newTitle = item.querySelector(".edit-title").value;

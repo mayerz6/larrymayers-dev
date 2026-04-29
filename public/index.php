@@ -3,8 +3,13 @@
 declare(strict_types=1);
 $rootDir = __DIR__ . "/../"; // Adjust as needed to point to the root directory
 
-include_once "{$rootDir}/src/Core/Database.php";
-// include_once "./core/databases/Database.php";
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
+
+include_once "{$rootDir}/src/Core/Auth.php";
+// include_once "{$rootDir}/src/Core/Database.php";
+include_once "{$rootDir}/core/databases/Database.php";
 include_once "{$rootDir}/src/Core/View.php";    
 // include_once "./core/databases/messages.sqlite";    
 include_once "{$rootDir}/src/Core/Router.php";
@@ -13,6 +18,8 @@ include_once "{$rootDir}/src/Controllers/AboutController.php";
 include_once "{$rootDir}/src/Controllers/AdminController.php";
 include_once "{$rootDir}/src/Controllers/ContactController.php";
 include_once "{$rootDir}/src/Controllers/ResumeController.php";
+include_once "{$rootDir}/src/Controllers/MessageController.php";
+include_once "{$rootDir}/src/Controllers/DashboardController.php";
 
 $request_uri = $_SERVER['REQUEST_URI'];
 $request_method = $_SERVER['REQUEST_METHOD'] ?? 'GET';

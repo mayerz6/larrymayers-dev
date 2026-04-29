@@ -1,161 +1,346 @@
 <?php
 
-
-function resume(): void {
-    $conn = Database::getLiteConnection();
-
-    $stmt = $conn->query("SELECT id, title, company, summary, start_year, end_year FROM resume ORDER BY created_at ASC");
-    $resumes = $stmt->fetchAll(PDO::FETCH_ASSOC);
-    $stmt = $conn->query("SELECT id, resume_id, duty, order_index FROM duties ORDER BY created_at ASC");
-    $duties = $stmt->fetchAll(PDO::FETCH_ASSOC);    
-
-    $dutiesMap = [];
-    foreach ($duties as $duty) {
-        $dutiesMap[$duty['resume_id']][] = $duty;
-    }
-
-    view('resume', ['resumes' => $resumes, 'duties' => $dutiesMap]);
+function resumeDb(): PDO
+{
+    $db = Database::getLiteConnection();
+    Database::createResumeTable($db);
+    Database::createDutiesTable($db);
+    return $db;
 }
 
-function resumeManage(): void {
-    session_start();
-    requireAuth();
-    $conn = Database::getLiteConnection();
-    // Database::createResumeTable($conn);
-    // Database::createDutiesTable($conn);
-    $stmt = $conn->query("SELECT id, title, company, summary, start_year, end_year FROM resume ORDER BY created_at ASC");
-    $resumes = $stmt->fetchAll(PDO::FETCH_ASSOC);
-    $stmt = $conn->query("SELECT id, resume_id, duty, order_index FROM duties ORDER BY created_at ASC");
-    $duties = $stmt->fetchAll(PDO::FETCH_ASSOC);    
-
-    $dutiesMap = [];
-    foreach ($duties as $duty) {
-        $dutiesMap[$duty['resume_id']][] = $duty;
-    }
-
-    view('resume-manage', ['resumes' => $resumes, 'duties' => $dutiesMap]);
+function isAjaxRequest(): bool
+{
+    return !empty($_SERVER['HTTP_X_REQUESTED_WITH'])
+        && strtolower($_SERVER['HTTP_X_REQUESTED_WITH']) === 'xmlhttprequest';
 }
 
-
-function resumeCreate(): void {
-    session_start();
-    requireAuth();
+function jsonResponse(array $payload, int $status = 200): void
+{
+    http_response_code($status);
     header('Content-Type: application/json');
+    echo json_encode($payload);
+}
+
+function redirectTo(string $path): void
+{
+    header("Location: {$path}");
+    exit();
+}
+
+function normalizeDuties(string $dutiesRaw): array
+{
+    return array_values(array_filter(array_map('trim', preg_split('/\r\n|\r|\n/', $dutiesRaw))));
+}
+
+function fetchResumeEntries(PDO $db): array
+{
+    $stmt = $db->query("
+        SELECT id, title, company, summary, start_year, end_year, order_index
+        FROM resume
+        ORDER BY order_index ASC, created_at DESC
+    ");
+
+    return $stmt->fetchAll(PDO::FETCH_ASSOC);
+}
+
+function fetchDutiesMap(PDO $db): array
+{
+    $stmt = $db->query("
+        SELECT id, resume_id, duty, order_index
+        FROM duties
+        ORDER BY resume_id ASC, order_index ASC
+    ");
+
+    $dutiesMap = [];
+    foreach ($stmt->fetchAll(PDO::FETCH_ASSOC) as $duty) {
+        $dutiesMap[$duty['resume_id']][] = $duty;
+    }
+
+    return $dutiesMap;
+}
+
+function resume(): void
+{
+    $db = resumeDb();
+    view('resume', [
+        'resumes' => fetchResumeEntries($db),
+        'duties' => fetchDutiesMap($db),
+    ]);
+}
+
+function resumeManage(): void
+{
+    requireAuth();
+
+    $db = resumeDb();
+    view('resume-manage', [
+        'resumes' => fetchResumeEntries($db),
+        'duties' => fetchDutiesMap($db),
+        'flash' => $_SESSION['flash'] ?? null,
+    ]);
+
+    unset($_SESSION['flash']);
+}
+
+function resumeCreateForm(): void
+{
+    requireAuth();
+    view('resume-create');
+}
+
+function resumeCreate(): void
+{
+    requireAuth();
 
     $title = trim($_POST['title'] ?? '');
     $company = trim($_POST['company'] ?? '');
     $summary = trim($_POST['summary'] ?? '');
     $start = trim($_POST['start_year'] ?? '');
     $end = trim($_POST['end_year'] ?? '');
-    $dutiesRaw = trim($_POST['duties'] ?? '');
+    $duties = normalizeDuties(trim($_POST['duties'] ?? ''));
 
-    if (!$title || !$company) {
-        http_response_code(400);
-        echo json_encode([
-            "status" => "error",
-            "message" => "Title and company are required"
-        ]);
-        return;
+    if ($title === '' || $company === '') {
+        if (isAjaxRequest()) {
+            jsonResponse([
+                'status' => 'error',
+                'message' => 'Title and company are required.',
+            ], 400);
+            return;
+        }
+
+        $_SESSION['flash'] = 'Title and company are required.';
+        redirectTo('/resume/create');
     }
 
-    $db = Database::getLiteConnection();
+    $db = resumeDb();
 
     try {
         $db->beginTransaction();
 
-        $stmt = $db->query("SELECT COALESCE(MAX(order_index), 0) + 1 AS next_order FROM resume");
-        // $nextOrder = $stmt->fetch(PDO::FETCH_ASSOC)['next_order'] ?? 1;
-        $nextOrder = $stmt->fetchColumn();
-
-        
+        $nextOrder = (int) $db
+            ->query("SELECT COALESCE(MAX(order_index), 0) + 1 FROM resume")
+            ->fetchColumn();
 
         $stmt = $db->prepare("
             INSERT INTO resume (title, company, summary, start_year, end_year, order_index)
-            VALUES (?, ?, ?, ?, ?, ?)
+            VALUES (:title, :company, :summary, :start_year, :end_year, :order_index)
         ");
+        $stmt->execute([
+            ':title' => $title,
+            ':company' => $company,
+            ':summary' => $summary,
+            ':start_year' => $start,
+            ':end_year' => $end,
+            ':order_index' => $nextOrder,
+        ]);
 
-        $stmt->execute([$title, $company, $summary, $start, $end, $nextOrder]);
-
-        $resumeId = $db->lastInsertId();
-
-        $duties = array_filter(array_map('trim', explode("\n", $dutiesRaw)));
-        $order = 1;
-        foreach ($duties as $duty) {
-            $stmt = $db->prepare("
-                INSERT INTO duties (resume_id, duty, order_index)
-                VALUES (?, ?, ?)
-            ");
-            $stmt->execute([$resumeId, $duty, $order++]);
-        }
+        $resumeId = (int) $db->lastInsertId();
+        saveResumeDuties($db, $resumeId, $duties);
 
         $db->commit();
 
-        echo json_encode([
-            "status" => "success",
-            "message" => "Resume entry created successfully."
+        if (isAjaxRequest()) {
+            jsonResponse([
+                'status' => 'success',
+                'message' => 'Resume entry created successfully.',
+                'redirect' => '/resume/manage',
             ]);
-    } catch (Exception $e) {
-        $db->rollBack();
-        http_response_code(500);
-        echo json_encode(["status" => "error", "message" => "{$e->getMessage()} An error occurred while creating the resume entry. Please try again later."]);
+            return;
+        }
+
+        $_SESSION['flash'] = 'Resume entry created successfully.';
+        redirectTo('/resume/manage');
+    } catch (Throwable $e) {
+        if ($db->inTransaction()) {
+            $db->rollBack();
+        }
+
+        if (isAjaxRequest()) {
+            jsonResponse([
+                'status' => 'error',
+                'message' => 'Unable to create resume entry.',
+            ], 500);
+            return;
+        }
+
+        $_SESSION['flash'] = 'Unable to create resume entry.';
+        redirectTo('/resume/create');
     }
 }
 
-function resumeDelete(): void {
-    session_start();
+function resumeEditForm(): void
+{
     requireAuth();
-    header('Content-Type: application/json');
 
-    $id = $_POST['id'] ?? null;
-
+    $id = filter_input(INPUT_GET, 'id', FILTER_VALIDATE_INT);
     if (!$id) {
-        http_response_code(400);
-        echo json_encode(["status" => "error", "message" => "Missing ID"]);
-        return;
+        $_SESSION['flash'] = 'Missing resume entry ID.';
+        redirectTo('/resume/manage');
     }
 
-    $db = Database::getLiteConnection();
+    $db = resumeDb();
 
-    try {
-        $stmt = $db->prepare("DELETE FROM resume WHERE id = ?");
-        $stmt->execute([$id]);
+    $stmt = $db->prepare("SELECT * FROM resume WHERE id = :id");
+    $stmt->execute([':id' => $id]);
+    $resume = $stmt->fetch(PDO::FETCH_ASSOC);
 
-        echo json_encode(["status" => "success"]);
-
-    } catch (Exception $e) {
-        http_response_code(500);
-        echo json_encode(["status" => "error"]);
+    if (!$resume) {
+        $_SESSION['flash'] = 'Resume entry not found.';
+        redirectTo('/resume/manage');
     }
+
+    $stmt = $db->prepare("SELECT * FROM duties WHERE resume_id = :id ORDER BY order_index ASC");
+    $stmt->execute([':id' => $id]);
+
+    view('resume-edit', [
+        'resume' => $resume,
+        'duties' => $stmt->fetchAll(PDO::FETCH_ASSOC),
+    ]);
 }
 
-function resumeUpdate(): void {
-    session_start();
+function resumeUpdate(): void
+{
     requireAuth();
-    header('Content-Type: application/json');
 
-    $id = $_POST['id'] ?? null;
+    $id = filter_input(INPUT_POST, 'id', FILTER_VALIDATE_INT);
     $title = trim($_POST['title'] ?? '');
     $company = trim($_POST['company'] ?? '');
     $summary = trim($_POST['summary'] ?? '');
     $start = trim($_POST['start_year'] ?? '');
     $end = trim($_POST['end_year'] ?? '');
-    $dutiesRaw = trim($_POST['duties'] ?? '');
+    $duties = normalizeDuties(trim($_POST['duties'] ?? ''));
 
-    if (!$id || !$title) {
-        http_response_code(400);
-        echo json_encode(["status" => "error"]);
-        return;
+    if (!$id || $title === '' || $company === '') {
+        if (isAjaxRequest()) {
+            jsonResponse([
+                'status' => 'error',
+                'message' => 'ID, title, and company are required.',
+            ], 400);
+            return;
+        }
+
+        $_SESSION['flash'] = 'ID, title, and company are required.';
+        redirectTo('/resume/manage');
     }
 
-    $db = Database::getLiteConnection();
+    $db = resumeDb();
 
+    try {
+        $db->beginTransaction();
+
+        $stmt = $db->prepare("
+            UPDATE resume
+            SET title = :title,
+                company = :company,
+                summary = :summary,
+                start_year = :start_year,
+                end_year = :end_year
+            WHERE id = :id
+        ");
+        $stmt->execute([
+            ':title' => $title,
+            ':company' => $company,
+            ':summary' => $summary,
+            ':start_year' => $start,
+            ':end_year' => $end,
+            ':id' => $id,
+        ]);
+
+        $stmt = $db->prepare("DELETE FROM duties WHERE resume_id = :id");
+        $stmt->execute([':id' => $id]);
+        saveResumeDuties($db, $id, $duties);
+
+        $db->commit();
+
+        if (isAjaxRequest()) {
+            jsonResponse([
+                'status' => 'success',
+                'message' => 'Resume entry updated successfully.',
+                'redirect' => '/resume/manage',
+            ]);
+            return;
+        }
+
+        $_SESSION['flash'] = 'Resume entry updated successfully.';
+        redirectTo('/resume/manage');
+    } catch (Throwable $e) {
+        if ($db->inTransaction()) {
+            $db->rollBack();
+        }
+
+        if (isAjaxRequest()) {
+            jsonResponse([
+                'status' => 'error',
+                'message' => 'Unable to update resume entry.',
+            ], 500);
+            return;
+        }
+
+        $_SESSION['flash'] = 'Unable to update resume entry.';
+        redirectTo("/resume/edit?id={$id}");
+    }
+}
+
+function resumeDelete(): void
+{
+    requireAuth();
+
+    $id = filter_input(INPUT_POST, 'id', FILTER_VALIDATE_INT);
+    if (!$id) {
+        if (isAjaxRequest()) {
+            jsonResponse([
+                'status' => 'error',
+                'message' => 'Missing resume entry ID.',
+            ], 400);
+            return;
+        }
+
+        $_SESSION['flash'] = 'Missing resume entry ID.';
+        redirectTo('/resume/manage');
+    }
+
+    $db = resumeDb();
+
+    try {
+        $stmt = $db->prepare("DELETE FROM resume WHERE id = :id");
+        $stmt->execute([':id' => $id]);
+
+        if (isAjaxRequest()) {
+            jsonResponse([
+                'status' => 'success',
+                'message' => 'Resume entry deleted successfully.',
+            ]);
+            return;
+        }
+
+        $_SESSION['flash'] = 'Resume entry deleted successfully.';
+        redirectTo('/resume/manage');
+    } catch (Throwable $e) {
+        if (isAjaxRequest()) {
+            jsonResponse([
+                'status' => 'error',
+                'message' => 'Unable to delete resume entry.',
+            ], 500);
+            return;
+        }
+
+        $_SESSION['flash'] = 'Unable to delete resume entry.';
+        redirectTo('/resume/manage');
+    }
+}
+
+function saveResumeDuties(PDO $db, int $resumeId, array $duties): void
+{
     $stmt = $db->prepare("
-        UPDATE resume
-        SET title = ?
-        WHERE id = ?
+        INSERT INTO duties (resume_id, duty, order_index)
+        VALUES (:resume_id, :duty, :order_index)
     ");
 
-    $stmt->execute([$title, $id]);
-
-    echo json_encode(["status" => "success"]);
+    foreach ($duties as $index => $duty) {
+        $stmt->execute([
+            ':resume_id' => $resumeId,
+            ':duty' => $duty,
+            ':order_index' => $index + 1,
+        ]);
+    }
 }

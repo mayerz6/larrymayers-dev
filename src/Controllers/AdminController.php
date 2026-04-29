@@ -4,7 +4,6 @@
 function login(): void { view('login'); }   
 
 function loginPost(): void {
-    session_start();
     header('Content-Type: application/json');
 
     $email = trim($_POST['email'] ?? '');
@@ -37,7 +36,6 @@ function loginPost(): void {
 }
 
 function logoutPost(): void {
-    session_start();
     session_unset();
     $_SESSION = [];
     session_destroy();

@@ -279,6 +279,7 @@
   .card {
     border: 1px solid var(--border);
     border-radius: var(--radius);
+    padding: 1em;
     background: linear-gradient(180deg, rgba(255, 255, 255, 0.045), rgba(255, 255, 255, 0.02));
     box-shadow: var(--shadow);
   }
