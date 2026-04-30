@@ -26,7 +26,7 @@ document.addEventListener("DOMContentLoaded", () => {
         navToggle.setAttribute("aria-expanded", "false");
         navLinks.classList.remove("is-open");
       }
-      navigate(url.pathname);
+      navigate(`${url.pathname}${url.search}`);
     }
   });
 
@@ -425,5 +425,5 @@ async function navigate(path) {
 }
 
 window.addEventListener("popstate", () => {
-  navigate(window.location.pathname);
+  navigate(`${window.location.pathname}${window.location.search}`);
 });

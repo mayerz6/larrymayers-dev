@@ -3,8 +3,8 @@
 function resumeDb(): PDO
 {
     $db = Database::getLiteConnection();
-    Database::createResumeTable($db);
-    Database::createDutiesTable($db);
+    // Database::createResumeTable($db);
+    // Database::createDutiesTable($db);
     return $db;
 }
 
