@@ -96,6 +96,22 @@ class Database{
         }
     }
 
+    public static function createProjectDutiesTable(PDO $conn): void {
+        $sql = "CREATE TABLE IF NOT EXISTS project_duties (
+            id INTEGER PRIMARY KEY AUTOINCREMENT,
+            project_id INTEGER NOT NULL,
+            duty TEXT NOT NULL,
+            order_index INTEGER NOT NULL,
+            created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+            FOREIGN KEY (project_id) REFERENCES projects(id) ON DELETE CASCADE
+        )";
+        try {
+            $conn->exec($sql);
+        } catch (PDOException $e) {
+            die(json_encode(["message" => "Failed to create project_duties table: " . $e->getMessage()]));
+        }
+    }
+
     public static function createResumeTable(PDO $conn): void {
         $sql = "CREATE TABLE IF NOT EXISTS resume (
             id INTEGER PRIMARY KEY AUTOINCREMENT,

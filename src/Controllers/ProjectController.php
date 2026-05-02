@@ -7,3 +7,9 @@ function projectDb(): PDO
     Database::createProjectDutiesTable($db);
     return $db;
 }
+
+function isAjaxRequest(): bool
+{
+    return isset($_SERVER['HTTP_X_REQUESTED_WITH']) 
+        && strtolower($_SERVER['HTTP_X_REQUESTED_WITH']) === 'xmlhttprequest';
+}
