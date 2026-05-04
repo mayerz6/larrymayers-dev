@@ -4,7 +4,7 @@
             <section id="resumeList">
                 <?php if (!empty($resumes) && !empty($duties)): ?>
                     <div class="container">
-                        <h2>Resume/Projects Catalog</h2>
+                        <h2>Resume Catalog</h2>
                         <ol class="resume-list">
                             <?php foreach ($resumes as $resume): ?>
                                 <div class="accordion">
