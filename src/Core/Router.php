@@ -13,9 +13,13 @@ $routes = [
     'GET /resume/edit' => ['handler' => 'resumeEditForm', 'args' => []],
     'GET /projects' => ['handler' => 'projects', 'args' => []],
     'GET /projects/manage' => ['handler' => 'projectManage', 'args' => []],
+    'GET /projects/create' => ['handler' => 'projectCreateForm', 'args' => []],
+    'GET /projects/edit' => ['handler' => 'projectEditForm', 'args' => []],
     'GET /messages' => ['handler' => 'messages', 'args' => []],
     
     // 'GET /expertise' => ['handler' => 'expertise', 'args' => []],
+    'POST /projects/create' => ['handler' => 'projectCreate', 'args' => []],
+    'POST /projects/update' => ['handler' => 'projectUpdate', 'args' => []],
     'POST /resume/create' => ['handler' => 'resumeCreate', 'args' => []],
     'POST /resume/update' => ['handler' => 'resumeUpdate', 'args' => []],
     'POST /contact' => ['handler' => 'contactPost', 'args' => []],

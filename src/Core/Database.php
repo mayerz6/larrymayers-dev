@@ -73,10 +73,12 @@ class Database{
             title TEXT NOT NULL,
             description TEXT NOT NULL,
             link TEXT,
+            order_index INTEGER NOT NULL DEFAULT 0,
             created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
         )";
         try {
             $conn->exec($sql);
+            self::ensureColumn($conn, 'projects', 'order_index', 'INTEGER NOT NULL DEFAULT 0');
         } catch (PDOException $e) {
             die(json_encode(["message" => "Failed to create projects table: " . $e->getMessage()]));
         }
@@ -112,6 +114,57 @@ class Database{
         }
     }
 
+    public static function createProjectTechnologiesTable(PDO $conn): void {
+        $sql = "CREATE TABLE IF NOT EXISTS project_technologies (
+            id INTEGER PRIMARY KEY AUTOINCREMENT,
+            project_id INTEGER NOT NULL,
+            technology TEXT NOT NULL,
+            order_index INTEGER NOT NULL DEFAULT 0,
+            created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+            FOREIGN KEY (project_id) REFERENCES projects(id) ON DELETE CASCADE
+        )";
+        try {
+            $conn->exec($sql);
+            self::ensureColumn($conn, 'project_technologies', 'order_index', 'INTEGER NOT NULL DEFAULT 0');
+        } catch (PDOException $e) {
+            die(json_encode(["message" => "Failed to create project_technologies table: " . $e->getMessage()]));
+        }
+    }
+
+
+    public static function clearProjectsTable(PDO $conn): void
+    {
+        $conn->exec("DELETE FROM project_duties");
+        $conn->exec("DELETE FROM project_technologies");
+        $conn->exec("DELETE FROM projects");
+    }
+
+    private static function ensureColumn(PDO $conn, string $table, string $column, string $definition): void
+    {
+        $stmt = $conn->query("PRAGMA table_info({$table})");
+        $columns = array_column($stmt->fetchAll(PDO::FETCH_ASSOC), 'name');
+
+        if (!in_array($column, $columns, true)) {
+            $conn->exec("ALTER TABLE {$table} ADD COLUMN {$column} {$definition}");
+        }
+    }
+
+
+    public static function createQualificationsTable(PDO $conn): void {
+        $sql = "CREATE TABLE IF NOT EXISTS qualifications (
+            id INTEGER PRIMARY KEY AUTOINCREMENT,
+            title TEXT NOT NULL,
+            institution TEXT NOT NULL,
+            year TEXT NOT NULL,
+            created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+        )";
+        try {
+            $conn->exec($sql);
+        } catch (PDOException $e) {
+            die(json_encode(["message" => "Failed to create qualifications table: " . $e->getMessage()]));
+        }
+    }
+
     public static function createResumeTable(PDO $conn): void {
         $sql = "CREATE TABLE IF NOT EXISTS resume (
             id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -143,21 +196,6 @@ class Database{
             $conn->exec($sql);
         } catch (PDOException $e) {
             die(json_encode(["message" => "Failed to create duties table: " . $e->getMessage()]));
-        }
-    }
-
-    public static function createQualificationsTable(PDO $conn): void {
-        $sql = "CREATE TABLE IF NOT EXISTS qualifications (
-            id INTEGER PRIMARY KEY AUTOINCREMENT,
-            title TEXT NOT NULL,
-            institution TEXT NOT NULL,
-            year TEXT NOT NULL,
-            created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
-        )";
-        try {
-            $conn->exec($sql);
-        } catch (PDOException $e) {
-            die(json_encode(["message" => "Failed to create qualifications table: " . $e->getMessage()]));
         }
     }
 
