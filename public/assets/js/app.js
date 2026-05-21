@@ -145,6 +145,43 @@ document.addEventListener("submit", async (e) => {
 
 });
 
+
+document.addEventListener("submit", async (e) => {
+    const form = e.target;
+    if (form.id === "projectForm") {
+        e.preventDefault();
+        const formData = new FormData(form);
+        const resMsg = document.getElementById("projectResMsg");
+    
+        try {
+            const res = await fetch("/projects/create", {
+                method: "POST",
+                headers: {
+                    "X-Requested-With": "XMLHttpRequest"
+                },
+                body: formData
+            });
+            const data = await res.json();
+            if (data.status === "success") {
+                resMsg.className = "text-success";
+                resMsg.textContent = data.message;
+                form.reset();
+                 setTimeout(() => {
+                    // navigate(data.redirect);
+                    window.location.href = data.redirect;
+                }, 500);
+            } else {
+                resMsg.className = "text-danger";
+                resMsg.textContent = data.message;
+            }
+
+        } catch(err) {
+            console.error("Form submission failed:", err);
+        }
+    }
+});
+
+
 document.addEventListener("click", async (e) => {
     // if (!e.target.classList.contains("delete-resume-btn")) return;
     if (e.target.classList.contains("delete-resume-btn")) {

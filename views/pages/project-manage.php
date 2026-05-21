@@ -10,26 +10,27 @@
     <section id="projectList">
         <div class="container">
             <h2><em>Manage Projects Catalog</em></h2>
-            <p class="text-muted">
-                <!-- Add any additional information or instructions here -->
-            </p>
-
-            <?php if(!empty($projects) && !empty($duties)): ?>
+            <p><a href="/projects/create" class="btn btn-primary mb-3">+ Add New Project</a></p>
+            <?php if(!empty($projects)): ?>
 
 
                 <?php foreach ($projects as $project): ?>
                     <div class="card mb-3">
                         <div class="card-body">
-                            <h4 class="card-title"><?php echo htmlspecialchars($project['title']); ?></h4>
-                            <p class="card-text"><?php echo nl2br(htmlspecialchars($project['description'])); ?></p>
-                            <p><strong>Duration:</strong> <?php echo htmlspecialchars($project['start_year']); ?> - <?php echo htmlspecialchars($project['end_year']); ?></p>
-                            <p><strong>Duties:</strong>
+                            <h4 class="card-title"><u>Title</u>: <?php echo htmlspecialchars($project['title']); ?></h4>
+                            <p class="card-text"><u>Breakdown</u>: <?php echo nl2br(htmlspecialchars($project['description'])); ?></p>
+                            <?php if (!empty($technologies[$project['id']])): ?>
+                                <p><u>Technologies</u>:</p>
                                 <ul>
-                                    <?php foreach ($duties[$project['id']] ?? [] as $duty): ?>
-                                        <li><?php echo htmlspecialchars($duty['duty']); ?></li>
+                                    <?php foreach ($technologies[$project['id']] as $technology): ?>
+                                        <li><?php echo htmlspecialchars($technology['technology']); ?></li>
                                     <?php endforeach; ?>
                                 </ul>
-                            </p>
+                            <?php endif; ?>
+                            <?php if (!empty($project['link'])): ?>
+                                <p><a href="<?php echo htmlspecialchars($project['link']); ?>" target="_blank" rel="noopener noreferrer">View Project</a></p>
+                            <?php endif; ?>
+                            <p><a class="btn btn-secondary" href="/projects/edit?id=<?php echo (int) $project['id']; ?>">Edit</a></p>
                         </div>
                     </div>
                 <?php endforeach; ?>

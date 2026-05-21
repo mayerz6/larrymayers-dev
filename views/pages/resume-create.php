@@ -12,6 +12,9 @@
             <?php endif; ?>
 
             <form id="resumeForm" class="form surface card-body" method="POST" action="/resume/create">
+                <fieldset>
+                    <legend>Resume Details</legend>
+                    <!-- <p>Provide details about your role, project, or milestone, including the title, company, summary, and dates.</p> -->
                 <div class="form-row">
                     <label for="title">Title</label>
                     <input type="text" id="title" name="title" required>
@@ -41,11 +44,12 @@
 
                 <div class="form-row">
                     <label for="duties">Duties or Highlights</label>
-                    <textarea id="duties" name="duties" rows="7" placeholder="Enter one item per line"></textarea>
+                    <textarea id="duties" name="duties" rows="7" placeholder="Enter one item per line" required></textarea>
                 </div>
 
                 <button class="btn btn-primary" type="submit">Add Entry</button>
                 <div id="resumeResMsg" class="text-small mt-2"></div>
+                </fieldset> 
             </form>
         </div>
     </section>
