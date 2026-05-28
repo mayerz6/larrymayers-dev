@@ -53,8 +53,14 @@ div#app {
 }
 
 .message-header .email {
-  color: #aaa;
+  color: #333;
   font-size: 12px;
+}
+
+.message-header h3 {
+  margin: 0;
+  font-size: 20px;
+  color: #333;
 }
 
 .message-body {

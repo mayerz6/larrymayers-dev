@@ -3,7 +3,7 @@
 <main>
     <section class="section" id="projects">
         <div class="container">
-            <p class="eyebrow">Portfolio</p>
+            
             <h1>Projects Catalog</h1>
             <p class="lead">Selected technical work, systems, and product builds.</p>
 
@@ -15,7 +15,7 @@
                 <div class="grid grid-2">
                     <?php foreach ($projects as $project): ?>
                         <article class="card card-body">
-                            <h2><?php echo htmlspecialchars($project['title']); ?></h2>
+                            <h3><?php echo htmlspecialchars($project['title']); ?></h3>
                             <p><?php echo nl2br(htmlspecialchars($project['description'])); ?></p>
 
                             <?php if (!empty($technologies[$project['id']])): ?>

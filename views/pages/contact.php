@@ -22,7 +22,7 @@
                             <textarea id="message" name="message" rows="5"></textarea>
                             <br>
                             <br>
-                            <button type="submit">Send Message</button>
+                            <button class="btn btn-primary" type="submit">Send Message</button>
                         </fieldset>
                     </form>
                     <div id="formResMsg" class="text-small mt-2"></div>

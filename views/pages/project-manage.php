@@ -28,9 +28,9 @@
                                 </ul>
                             <?php endif; ?>
                             <?php if (!empty($project['link'])): ?>
-                                <p><a href="<?php echo htmlspecialchars($project['link']); ?>" target="_blank" rel="noopener noreferrer">View Project</a></p>
+                                <button class="btn btn-info" type="button"><a href="<?php echo htmlspecialchars($project['link']); ?>" target="_blank" rel="noopener noreferrer">View Project</a></button>
                             <?php endif; ?>
-                            <p><a class="btn btn-secondary" href="/projects/edit?id=<?php echo (int) $project['id']; ?>">Edit</a></p>
+                            <button class="btn btn-info" type="button"><a href="/projects/edit?id=<?php echo (int) $project['id']; ?>">Edit</a></button>
                         </div>
                     </div>
                 <?php endforeach; ?>

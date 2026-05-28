@@ -24,9 +24,9 @@
                     <ul class="nav-links" id="primary-navigation">
                         <li><a href="/profile">Profile</a></li>
                         <li><a href="/about">About</a></li>
-                        <!-- <li><a href="/projects">Projects</a></li> -->
-                        <li><a href="/contact">Contact</a></li>
+                        <li><a href="/projects">Projects</a></li>
                         <li><a href="/resume">Resume</a></li>
+                        <li><a href="/contact">Contact</a></li>
                          <?php if (!empty($_SESSION['user_id'])): ?>
                             <li><a href="/dashboard">Dashboard</a></li>
                             <li><a href="#" id="logoutForm">Logout</a></li>

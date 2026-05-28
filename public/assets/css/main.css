@@ -251,7 +251,8 @@
   }
 
   h3 {
-    font-size: 1.35rem;
+    color: var(--text-heading);
+    font-size: clamp(2rem, 4vw, 1.35rem);
     font-weight: 700;
   }
 
@@ -318,6 +319,7 @@
     background: linear-gradient(180deg, rgba(255, 255, 255, 0.045), rgba(255, 255, 255, 0.02));
     box-shadow: var(--shadow);
     padding: 20px;
+    margin-top: 2em;
   }
 
   .card-body {

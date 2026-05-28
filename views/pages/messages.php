@@ -21,7 +21,7 @@
                 <div class="message-body"><?php echo nl2br(htmlspecialchars($msg['message'])); ?></div>
                 <div class="message-footer text-muted">
                     <small>Received on <?php echo date("F j, Y, g:i a", strtotime($msg['created_at'])); ?></small>
-                    <button class="delete-btn" data-id="<?= $msg['id'] ?>">Delete</button>
+                    <button class="btn btn-danger delete-btn" data-id="<?= $msg['id'] ?>">Delete</button>
                 </div>
             </div>
         <?php endforeach; ?>
