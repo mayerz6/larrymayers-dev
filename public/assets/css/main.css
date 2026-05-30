@@ -251,7 +251,8 @@
   }
 
   h3 {
-    font-size: 1.35rem;
+    color: var(--text-heading);
+    font-size: clamp(2rem, 4vw, 1.35rem);
     font-weight: 700;
   }
 
@@ -318,6 +319,7 @@
     background: linear-gradient(180deg, rgba(255, 255, 255, 0.045), rgba(255, 255, 255, 0.02));
     box-shadow: var(--shadow);
     padding: 20px;
+    margin-top: 2em;
   }
 
   .card-body {
@@ -438,6 +440,180 @@
     border: 1px solid var(--border);
     border-radius: var(--radius);
     background: var(--bg-elevated);
+  }
+
+  /* Dashboard */
+
+  .dashboard-shell {
+    padding-top: 3.5rem;
+  }
+
+  .dashboard-hero {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(240px, 320px);
+    gap: 1.5rem;
+    align-items: end;
+  }
+
+  .dashboard-session {
+    display: grid;
+    gap: 0.35rem;
+    padding: 1.25rem;
+  }
+
+  .dashboard-session strong {
+    color: var(--text);
+    font-family: var(--font-display);
+    font-size: 1.15rem;
+  }
+
+  .dashboard-kicker,
+  .dashboard-status,
+  .stat-label,
+  .stat-note,
+  .action-card small,
+  .ops-list small {
+    color: var(--text-muted);
+    font-size: 0.82rem;
+  }
+
+  .dashboard-status {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.45rem;
+  }
+
+  .dashboard-status::before,
+  .ops-dot {
+    content: "";
+    width: 8px;
+    height: 8px;
+    border-radius: 999px;
+    background: var(--accent);
+    box-shadow: 0 0 14px rgba(94, 234, 212, 0.5);
+  }
+
+  .dashboard-alert {
+    margin-top: 1.25rem;
+    padding: 0.9rem 1rem;
+    border: 1px solid rgba(94, 234, 212, 0.28);
+    border-radius: var(--radius);
+    background: rgba(94, 234, 212, 0.08);
+    color: var(--text);
+  }
+
+  .dashboard-stats {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 1rem;
+    margin-top: 2rem;
+  }
+
+  .stat-card,
+  .dashboard-panel {
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    background: rgba(255, 255, 255, 0.035);
+    box-shadow: var(--shadow);
+  }
+
+  .stat-card {
+    display: grid;
+    gap: 0.35rem;
+    padding: 1.25rem;
+  }
+
+  .stat-card strong {
+    color: var(--text);
+    font-family: var(--font-display);
+    font-size: clamp(2rem, 5vw, 3.2rem);
+    line-height: 1;
+  }
+
+  .dashboard-grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(280px, 360px);
+    gap: 1.25rem;
+    margin-top: 1.25rem;
+  }
+
+  .dashboard-panel {
+    padding: 1.25rem;
+  }
+
+  .panel-heading {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    margin-bottom: 1rem;
+  }
+
+  .panel-heading p,
+  .dashboard-panel h2 {
+    margin: 0;
+  }
+
+  .action-list,
+  .ops-list {
+    display: grid;
+    gap: 0.75rem;
+  }
+
+  .action-card {
+    display: grid;
+    grid-template-columns: 44px minmax(0, 1fr);
+    gap: 0.85rem;
+    align-items: center;
+    padding: 0.95rem;
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    background: rgba(255, 255, 255, 0.025);
+    transition: background 160ms ease, border-color 160ms ease, transform 160ms ease;
+  }
+
+  .action-card:hover {
+    border-color: rgba(110, 168, 254, 0.45);
+    background: rgba(110, 168, 254, 0.08);
+    transform: translateY(-1px);
+  }
+
+  .action-card strong,
+  .action-card small {
+    display: block;
+  }
+
+  .action-icon {
+    width: 44px;
+    height: 44px;
+    display: grid;
+    place-items: center;
+    border: 1px solid rgba(110, 168, 254, 0.34);
+    border-radius: var(--radius);
+    background: rgba(110, 168, 254, 0.1);
+    color: var(--primary);
+    font-family: var(--font-mono);
+    font-weight: 700;
+  }
+
+  .ops-list > div {
+    display: grid;
+    grid-template-columns: 12px minmax(0, 1fr);
+    column-gap: 0.7rem;
+    row-gap: 0.1rem;
+    align-items: center;
+    padding-bottom: 0.75rem;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .ops-list small {
+    grid-column: 2;
+  }
+
+  .dashboard-actions {
+    display: grid;
+    gap: 0.65rem;
+    margin-top: 1rem;
   }
 
   /* Footer */
@@ -586,6 +762,12 @@
 
     .section {
       padding: 3.5rem 0;
+    }
+
+    .dashboard-hero,
+    .dashboard-stats,
+    .dashboard-grid {
+      grid-template-columns: 1fr;
     }
 
     .footer-inner {

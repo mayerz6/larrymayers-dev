@@ -9,7 +9,7 @@
                     
                      <form id="contactForm">
                         <fieldset>
-                            <legend>Get in Touch</legend>           
+                            <legend><h2>Get in Touch</h2></legend>           
                             <label for="name">Name:</label>
                             <input type="text" id="name" name="name" required>
                             <br>
@@ -22,7 +22,7 @@
                             <textarea id="message" name="message" rows="5"></textarea>
                             <br>
                             <br>
-                            <button type="submit">Send Message</button>
+                            <button class="btn btn-primary mb-3" type="submit">Send Message</button>
                         </fieldset>
                     </form>
                     <div id="formResMsg" class="text-small mt-2"></div>
