@@ -14,9 +14,9 @@ function dashboard(): void {
 
     try {
         $db = Database::getLiteConnection();
-        Database::createMsgTable($db);
-        Database::createProjectsTable($db);
-        Database::createResumeTable($db);
+        // Database::createMsgTable($db);
+        // Database::createProjectsTable($db);
+        // Database::createResumeTable($db);
 
         $stats['messages'] = (int) $db->query("SELECT COUNT(*) FROM messages")->fetchColumn();
         $stats['projects'] = (int) $db->query("SELECT COUNT(*) FROM projects")->fetchColumn();
