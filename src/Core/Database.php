@@ -1,7 +1,8 @@
 <?php
 
 
-class Database{
+class Database
+{
 
     private static $host;
     private static $db;
@@ -10,20 +11,22 @@ class Database{
     private static $charset = "utf8mb4";
     // public $pdo;
 
-    
-    public function __construct(){
+
+    public function __construct()
+    {
 
         // self::$host = Secrets::getStageHost();
         // self::$user = Secrets::getDBUser();
         // self::$pwd = Secrets::getPwdStage();
         // self::$db = Secrets::getDBStage();
-        
-        
+
+
     }
 
     public static ?PDO $conn = null;
 
-    public static function getLiteConnection(): PDO {
+    public static function getLiteConnection(): PDO
+    {
         if (self::$conn === null) {
             try {
                 self::$conn = new PDO("sqlite:" . __DIR__ . "/../../database/app.sqlite");
@@ -37,22 +40,24 @@ class Database{
     }
 
 
-    public function getConnection(){
+    public function getConnection()
+    {
 
         $dsn = "mysql:host=" . self::$host . ";dbname=" . self::$db . ";charset=" . self::$charset;
         // $dsn = "mysql:host=self::$host;dbname=$this->db;charset=$this->charset";
-        
-        try{
+
+        try {
             $pdo = new PDO($dsn, self::$user, self::$pwd);
             $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
             return $pdo;
-        } catch (PDOException $e){
+        } catch (PDOException $e) {
             die(json_encode(["message" => "Database connection failed: " . $e->getMessage()]));
         }
 
     }
 
-    public static function createMsgTable(PDO $conn): void {
+    public static function createMsgTable(PDO $conn): void
+    {
         $sql = "CREATE TABLE IF NOT EXISTS messages (
             id INTEGER PRIMARY KEY AUTOINCREMENT,
             name TEXT NOT NULL,
@@ -65,9 +70,10 @@ class Database{
         } catch (PDOException $e) {
             die(json_encode(["message" => "Failed to create messages table: " . $e->getMessage()]));
         }
-    }   
+    }
 
-    public static function createProjectsTable(PDO $conn): void {
+    public static function createProjectsTable(PDO $conn): void
+    {
         $sql = "CREATE TABLE IF NOT EXISTS projects (
             id INTEGER PRIMARY KEY AUTOINCREMENT,
             title TEXT NOT NULL,
@@ -82,9 +88,42 @@ class Database{
         } catch (PDOException $e) {
             die(json_encode(["message" => "Failed to create projects table: " . $e->getMessage()]));
         }
-    }   
+    }
 
-    public static function createExpertiseTable(PDO $conn): void {
+    public static function createBlogPostsTable(PDO $conn): void
+    {
+        $sql = "CREATE TABLE IF NOT EXISTS blog_posts (
+            id INTEGER PRIMARY KEY AUTOINCREMENT,
+            title TEXT NOT NULL,
+            content TEXT NOT NULL,
+            created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+        )";
+        try {
+            $conn->exec($sql);
+        } catch (PDOException $e) {
+            die(json_encode(["message" => "Failed to create blog_posts table: " . $e->getMessage()]));
+        }
+    }
+
+    public static function createBlogTagsTable(PDO $conn): void
+    {
+        $sql = "CREATE TABLE IF NOT EXISTS blog_tags (
+            id INTEGER PRIMARY KEY AUTOINCREMENT,
+            post_id INTEGER NOT NULL,
+            tag TEXT NOT NULL,
+            created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+            FOREIGN KEY (post_id) REFERENCES blog_posts(id) ON DELETE CASCADE
+        )";
+        try {
+            $conn->exec($sql);
+        } catch (PDOException $e) {
+            die(json_encode(["message" => "Failed to create blog_tags table: " . $e->getMessage()]));
+        }
+    }
+
+
+    public static function createExpertiseTable(PDO $conn): void
+    {
         $sql = "CREATE TABLE IF NOT EXISTS expertise (
             id INTEGER PRIMARY KEY AUTOINCREMENT,
             skill TEXT NOT NULL,
@@ -98,7 +137,8 @@ class Database{
         }
     }
 
-    public static function createProjectDutiesTable(PDO $conn): void {
+    public static function createProjectDutiesTable(PDO $conn): void
+    {
         $sql = "CREATE TABLE IF NOT EXISTS project_duties (
             id INTEGER PRIMARY KEY AUTOINCREMENT,
             project_id INTEGER NOT NULL,
@@ -114,7 +154,8 @@ class Database{
         }
     }
 
-    public static function createProjectTechnologiesTable(PDO $conn): void {
+    public static function createProjectTechnologiesTable(PDO $conn): void
+    {
         $sql = "CREATE TABLE IF NOT EXISTS project_technologies (
             id INTEGER PRIMARY KEY AUTOINCREMENT,
             project_id INTEGER NOT NULL,
@@ -150,7 +191,8 @@ class Database{
     }
 
 
-    public static function createQualificationsTable(PDO $conn): void {
+    public static function createQualificationsTable(PDO $conn): void
+    {
         $sql = "CREATE TABLE IF NOT EXISTS qualifications (
             id INTEGER PRIMARY KEY AUTOINCREMENT,
             title TEXT NOT NULL,
@@ -165,7 +207,8 @@ class Database{
         }
     }
 
-    public static function createResumeTable(PDO $conn): void {
+    public static function createResumeTable(PDO $conn): void
+    {
         $sql = "CREATE TABLE IF NOT EXISTS resume (
             id INTEGER PRIMARY KEY AUTOINCREMENT,
             title TEXT NOT NULL,
@@ -183,7 +226,8 @@ class Database{
         }
     }
 
-    public static function createDutiesTable(PDO $conn): void {
+    public static function createDutiesTable(PDO $conn): void
+    {
         $sql = "CREATE TABLE IF NOT EXISTS duties (
             id INTEGER PRIMARY KEY AUTOINCREMENT,
             resume_id INTEGER NOT NULL,
@@ -199,7 +243,8 @@ class Database{
         }
     }
 
-    public static function createUsersTable(PDO $conn): void {
+    public static function createUsersTable(PDO $conn): void
+    {
         $sql = "CREATE TABLE IF NOT EXISTS users (
             id INTEGER PRIMARY KEY AUTOINCREMENT,
             email TEXT UNIQUE NOT NULL,
@@ -213,7 +258,8 @@ class Database{
         }
     }
 
-    public static function insertDefaultUser(PDO $conn): void {
+    public static function insertDefaultUser(PDO $conn): void
+    {
         $email = "larry@larrymayers.site";
         $password_hash = password_hash("M@y3rZ!2#", PASSWORD_DEFAULT);
         $sql = "INSERT OR IGNORE INTO users (email, password_hash) VALUES (:email, :password_hash)";
@@ -223,7 +269,8 @@ class Database{
         $stmt->execute();
     }
 
-    public static function closeConnection(): void {
+    public static function closeConnection(): void
+    {
         self::$conn = null;
     }
 
