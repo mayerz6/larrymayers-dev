@@ -21,9 +21,9 @@ $adminEmail = $_SESSION['email'] ?? 'Admin';
             </div>
 
             <?php if (!empty($flash)): ?>
-                <div class="dashboard-alert">
-                    <?php echo htmlspecialchars($flash); ?>
-                </div>
+            <div class="dashboard-alert">
+                <?php echo htmlspecialchars($flash); ?>
+            </div>
             <?php endif; ?>
 
             <div class="dashboard-stats">
@@ -56,6 +56,14 @@ $adminEmail = $_SESSION['email'] ?? 'Admin';
                     </div>
 
                     <div class="action-list">
+                        <a class="action-card" href="/blog/manage">
+                            <span class="action-icon">B</span>
+                            <span>
+                                <strong>Manage Blog Posts</strong>
+                                <small>Create, edit, and review blog entries.</small>
+                            </span>
+                        </a>
+
                         <a class="action-card" href="/projects/manage">
                             <span class="action-icon">P</span>
                             <span>

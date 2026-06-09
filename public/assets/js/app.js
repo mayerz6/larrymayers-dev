@@ -181,6 +181,57 @@ document.addEventListener("submit", async (e) => {
     }
 });
 
+document.addEventListener("submit", async (e) => {
+    const form = e.target;
+    if (form.id === "blogPostForm") {
+        e.preventDefault();
+        const formData = new FormData(form);
+        const resMsg = document.getElementById("blogResMsg");
+        const submitButton = form.querySelector('button[type="submit"]');
+
+        if (submitButton) {
+            submitButton.disabled = true;
+        }
+
+        try {
+            const res = await fetch(form.action || "/blog/create", {
+                method: "POST",
+                headers: {
+                    "X-Requested-With": "XMLHttpRequest"
+                },
+                body: formData
+            });
+
+            const data = await res.json();
+            if (resMsg) {
+                resMsg.className = data.status === "success"
+                    ? "text-success"
+                    : "text-danger";
+                resMsg.textContent = data.message;
+            }
+
+            if (data.status === "success") {
+                form.reset();
+                if (data.redirect) {
+                    setTimeout(() => {
+                        window.location.href = data.redirect;
+                    }, 500);
+                }
+            }
+        } catch(err) {
+            console.error("Blog post submission failed:", err);
+            if (resMsg) {
+                resMsg.className = "text-danger";
+                resMsg.textContent = "Unable to create blog post. Please try again.";
+            }
+        } finally {
+            if (submitButton) {
+                submitButton.disabled = false;
+            }
+        }
+    }
+});
+
 
 document.addEventListener("click", async (e) => {
     // if (!e.target.classList.contains("delete-resume-btn")) return;

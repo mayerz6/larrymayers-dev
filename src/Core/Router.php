@@ -16,7 +16,11 @@ $routes = [
     'GET /projects/create' => ['handler' => 'projectCreateForm', 'args' => []],
     'GET /projects/edit' => ['handler' => 'projectEditForm', 'args' => []],
     'GET /messages' => ['handler' => 'messages', 'args' => []],
-    
+    'GET /blog' => ['handler' => 'blog', 'args' => []],
+    'GET /blog/manage' => ['handler' => 'blogManage', 'args' => []],
+    'GET /blog/create' => ['handler' => 'blogCreateForm', 'args' => []],
+    'GET /blog/edit' => ['handler' => 'blogEditForm', 'args' => []],
+
     // 'GET /expertise' => ['handler' => 'expertise', 'args' => []],
     'POST /projects/create' => ['handler' => 'projectCreate', 'args' => []],
     'POST /projects/update' => ['handler' => 'projectUpdate', 'args' => []],
@@ -29,6 +33,7 @@ $routes = [
     'POST /login' => ['handler' => 'loginPost', 'args' => []],
     'POST /logout' => ['handler' => 'logoutPost', 'args' => []],
     'POST /messages/delete' => ['handler' => 'deleteMessage', 'args' => []],
-    // 'GET /blog' => ['handler' => 'blog', 'args' => []],
+    'POST /blog/create' => ['handler' => 'blogCreate', 'args' => []],
+    'POST /blog/update' => ['handler' => 'blogUpdate', 'args' => []],
     // Add more routes here as needed
 ];
