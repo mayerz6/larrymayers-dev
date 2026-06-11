@@ -23,16 +23,16 @@ Supported and maintained enterprise ETL workflows for a cybersecurity platform u
 
 ## Technologies
 
-* AWS S3
-* AWS EC2
-* AWS EMR
-* AWS RDS
-* AWS Glue
-* Amazon Redshift
-* Python
-* Pandas
-* Jupyter Notebook
-* SQL
+- AWS S3
+- AWS EC2
+- AWS EMR
+- AWS RDS
+- AWS Glue
+- Amazon Redshift
+- Python
+- Pandas
+- Jupyter Notebook
+- SQL
 
 ## Duties
 
@@ -63,13 +63,13 @@ Contributed to data warehousing activities involving AWS Redshift environments, 
 
 ## Technologies
 
-* Amazon Redshift
-* SQL
-* Python
-* AWS Glue
-* Pandas
-* ETL
-* Data Warehousing
+- Amazon Redshift
+- SQL
+- Python
+- AWS Glue
+- Pandas
+- ETL
+- Data Warehousing
 
 ## Duties
 
@@ -98,12 +98,12 @@ Developed Python-based scripts and utilities for cleaning, transforming, validat
 
 ## Technologies
 
-* Python
-* Pandas
-* Regex
-* CSV Processing
-* Jupyter Notebook
-* Data Engineering
+- Python
+- Pandas
+- Regex
+- CSV Processing
+- Jupyter Notebook
+- Data Engineering
 
 ## Duties
 
@@ -132,11 +132,11 @@ Produced monthly KPI and engagement reports for ecommerce platforms to support b
 
 ## Technologies
 
-* Google Analytics
-* SEMrush
-* Screaming Frog SEO Spider
-* Excel
-* Reporting Analytics
+- Google Analytics
+- SEMrush
+- Screaming Frog SEO Spider
+- Excel
+- Reporting Analytics
 
 ## Duties
 
@@ -165,12 +165,12 @@ Developed and maintained publicly accessible business websites while supporting 
 
 ## Technologies
 
-* HTML
-* CSS
-* JavaScript
-* PHP
-* ASP.NET
-* VB.NET
+- HTML
+- CSS
+- JavaScript
+- PHP
+- ASP.NET
+- VB.NET
 
 ## Duties
 
@@ -200,12 +200,12 @@ Participated in automated UI testing activities using Selenium-based tooling to 
 
 ## Technologies
 
-* Selenium WebDriver
-* NodeJS
-* PHP
-* VB.NET
-* Selenium Server
-* QA Testing
+- Selenium WebDriver
+- NodeJS
+- PHP
+- VB.NET
+- Selenium Server
+- QA Testing
 
 ## Duties
 
@@ -234,13 +234,13 @@ Managed enterprise network infrastructure, Active Directory operations, workstat
 
 ## Technologies
 
-* Active Directory
-* Windows Server
-* Group Policy Management
-* Windows PowerShell
-* LAN/WAN Networking
-* Telephony Systems
-* Systems Administration
+- Active Directory
+- Windows Server
+- Group Policy Management
+- Windows PowerShell
+- LAN/WAN Networking
+- Telephony Systems
+- Systems Administration
 
 ## Duties
 
@@ -263,7 +263,7 @@ Cybersecurity Monitoring & Vulnerability Assessment Support
 
 ## Description
 
-Supported network monitoring and vulnerability assessment activities using cybersecurity and systems administration tools within enterprise environments.
+Supported network monitoring and vulnerability assessment activities using cybersecurity and systems administration tools within corporate environments.
 
 ## Suggested Link
 
@@ -271,13 +271,12 @@ Supported network monitoring and vulnerability assessment activities using cyber
 
 ## Technologies
 
-* OpenVAS
-* Wireshark
-* Kali Linux
-* PacketTracer
-* PfSense
-* Windows Server
-* Cybersecurity
+- OpenVAS
+- Wireshark
+- Kali Linux
+- PacketTracer
+- PfSense
+- Windows Server
 
 ## Duties
 
@@ -306,10 +305,10 @@ Produced and maintained technical documentation relating to infrastructure asset
 
 ## Technologies
 
-* Microsoft Office
-* Technical Documentation
-* Systems Administration
-* IT Operations
+- Microsoft Office
+- Technical Documentation
+- Systems Administration
+- IT Operations
 
 ## Duties
 
@@ -338,11 +337,11 @@ Participated in operational and workflow improvement efforts by recommending enh
 
 ## Technologies
 
-* Process Analysis
-* Technical Operations
-* Workflow Optimization
-* Systems Support
-* Reporting
+- Process Analysis
+- Technical Operations
+- Workflow Optimization
+- Systems Support
+- Reporting
 
 ## Duties
 
@@ -371,11 +370,11 @@ Supported backup management, infrastructure continuity, and operational recovery
 
 ## Technologies
 
-* Windows Server
-* Backup Operations
-* Systems Administration
-* Active Directory
-* Infrastructure Support
+- Windows Server
+- Backup Operations
+- Systems Administration
+- Active Directory
+- Infrastructure Support
 
 ## Duties
 
@@ -413,17 +412,17 @@ CREATE TABLE project_category_map (
 
 Suggested categories:
 
-* Data Engineering
-* ETL
-* Web Development
-* Cybersecurity
-* Systems Administration
-* Analytics
-* AWS
-* Networking
-* QA Testing
-* Process Improvement
-* Reporting
+- Data Engineering
+- ETL
+- Web Development
+- Cybersecurity
+- Systems Administration
+- Analytics
+- AWS
+- Networking
+- QA Testing
+- Process Improvement
+- Reporting
 
 ---
 
@@ -439,21 +438,20 @@ That combination is extremely valuable because most engineers specialize in only
 
 Your portfolio database should reflect all three identities.
 
-
 I’ve now rebuilt the entire project inventory using ONLY the accomplishments and responsibilities explicitly supported by your current resume.
 
 This version is:
 
-* grounded in real-world experience
-* professionally defensible in interviews
-* aligned with your actual career progression
-* and structured for insertion into your SQLite portfolio system
+- grounded in real-world experience
+- professionally defensible in interviews
+- aligned with your actual career progression
+- and structured for insertion into your SQLite portfolio system
 
 More importantly, this now reflects your evolution from:
 
-* IT Infrastructure →
-* Web Development →
-* QA/Systems Operations →
-* Cloud Data Engineering
+- IT Infrastructure →
+- Web Development →
+- QA/Systems Operations →
+- Cloud Data Engineering
 
 —which is actually a very strong technical journey.

@@ -1,5 +1,5 @@
 <?php
-$stats = $stats ?? ['messages' => 0, 'projects' => 0, 'resume' => 0];
+$stats = $stats ?? ['posts' => 0, 'messages' => 0, 'projects' => 0, 'resume' => 0];
 $adminEmail = $_SESSION['email'] ?? 'Admin';
 ?>
 
@@ -21,12 +21,18 @@ $adminEmail = $_SESSION['email'] ?? 'Admin';
             </div>
 
             <?php if (!empty($flash)): ?>
-                <div class="dashboard-alert">
-                    <?php echo htmlspecialchars($flash); ?>
-                </div>
+            <div class="dashboard-alert">
+                <?php echo htmlspecialchars($flash); ?>
+            </div>
             <?php endif; ?>
 
             <div class="dashboard-stats">
+                <article class="stat-card">
+                    <span class="stat-label">Blog Posts</span>
+                    <strong><?php echo (int) $stats['posts']; ?></strong>
+                    <span class="stat-note">Published blog post entries</span>
+                </article>
+
                 <article class="stat-card">
                     <span class="stat-label">Messages</span>
                     <strong><?php echo (int) $stats['messages']; ?></strong>
@@ -56,6 +62,14 @@ $adminEmail = $_SESSION['email'] ?? 'Admin';
                     </div>
 
                     <div class="action-list">
+                        <a class="action-card" href="/blog/manage">
+                            <span class="action-icon">B</span>
+                            <span>
+                                <strong>Manage Blog Posts</strong>
+                                <small>Create, edit, and review blog entries.</small>
+                            </span>
+                        </a>
+
                         <a class="action-card" href="/projects/manage">
                             <span class="action-icon">P</span>
                             <span>
