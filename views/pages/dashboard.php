@@ -1,5 +1,5 @@
 <?php
-$stats = $stats ?? ['messages' => 0, 'projects' => 0, 'resume' => 0];
+$stats = $stats ?? ['posts' => 0, 'messages' => 0, 'projects' => 0, 'resume' => 0];
 $adminEmail = $_SESSION['email'] ?? 'Admin';
 ?>
 
@@ -27,6 +27,12 @@ $adminEmail = $_SESSION['email'] ?? 'Admin';
             <?php endif; ?>
 
             <div class="dashboard-stats">
+                <article class="stat-card">
+                    <span class="stat-label">Blog Posts</span>
+                    <strong><?php echo (int) $stats['posts']; ?></strong>
+                    <span class="stat-note">Published blog post entries</span>
+                </article>
+
                 <article class="stat-card">
                     <span class="stat-label">Messages</span>
                     <strong><?php echo (int) $stats['messages']; ?></strong>

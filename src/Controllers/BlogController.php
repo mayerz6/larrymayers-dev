@@ -52,7 +52,10 @@ function fetchBlogPost(PDO $db, int $id): ?array
 function blogCreateForm(): void
 {
     requireAuth();
-    view('blog-create');
+    view('blog-create', [
+        'flash' => $_SESSION['flash'] ?? null,
+    ]);
+    unset($_SESSION['flash']);
 }
 
 
@@ -67,13 +70,12 @@ function blogCreate(): void
         if (isAjaxRequest()) {
             jsonResponse([
                 'status' => 'error',
-                'message' => 'Title and content are required.',
+                'message' => 'Title and content are required!!!',
             ], 400);
             return;
         }
 
         $_SESSION['flash'] = 'Title and content are required.';
-        redirectTo('/blog/create');
     }
 
     $db = blogDb();
@@ -98,7 +100,6 @@ function blogCreate(): void
         }
 
         $_SESSION['flash'] = 'Blog post created successfully.';
-        redirectTo('/blog/manage');
     } catch (Throwable $e) {
         if (isAjaxRequest()) {
             jsonResponse([
@@ -109,7 +110,6 @@ function blogCreate(): void
         }
 
         $_SESSION['flash'] = 'Unable to create blog post.';
-        redirectTo('/blog/create');
     }
 }
 

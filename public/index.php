@@ -23,9 +23,9 @@ include_once "{$rootDir}/src/Controllers/MessageController.php";
 include_once "{$rootDir}/src/Controllers/DashboardController.php";
 include_once "{$rootDir}/src/Controllers/BlogController.php";
 
-$request_uri = $_SERVER['REQUEST_URI'];
+$request_uri = $_SERVER['REQUEST_URI'] ?? '/';
 $request_method = $_SERVER['REQUEST_METHOD'] ?? 'GET';
-$request_path = strtok($request_uri, '?'); // Remove query string
+$request_path = normalizeRequestPath($request_uri);
 
 
 $full_key = "{$request_method} {$request_path}";
@@ -36,6 +36,23 @@ if ($request_method === 'POST') {
     if (is_string($override) && $override !== '') {
         $request_method = strtoupper($override);
     }
+}
+
+function normalizeRequestPath(string $requestUri): string
+{
+    $path = parse_url($requestUri, PHP_URL_PATH);
+
+    if (!is_string($path) || $path === '') {
+        return '/';
+    }
+
+    $path = preg_replace('#/+#', '/', $path) ?? $path;
+
+    if ($path !== '/') {
+        $path = rtrim($path, '/');
+    }
+
+    return $path[0] === '/' ? $path : "/{$path}";
 }
 
 

@@ -185,16 +185,18 @@ document.addEventListener("submit", async (e) => {
     const form = e.target;
     if (form.id === "blogPostForm") {
         e.preventDefault();
-        const formData = new FormData(form);
         const resMsg = document.getElementById("blogResMsg");
         const submitButton = form.querySelector('button[type="submit"]');
+        const formAction = new URL(form.action || "/blog/create", window.location.origin);
 
-        if (submitButton) {
-            submitButton.disabled = true;
+        if (formAction.pathname === "/blog/create" && !validateBlogCreateForm(form, resMsg)) {
+            return;
         }
 
+        const formData = new FormData(form);
+
         try {
-            const res = await fetch(form.action || "/blog/create", {
+            const res = await fetch(formAction.href, {
                 method: "POST",
                 headers: {
                     "X-Requested-With": "XMLHttpRequest"
@@ -230,6 +232,69 @@ document.addEventListener("submit", async (e) => {
             }
         }
     }
+});
+
+function validateBlogCreateForm(form, resMsg) {
+    const titleInput = form.querySelector('[name="title"]');
+    const contentInput = form.querySelector('[name="content"]');
+    const title = titleInput ? titleInput.value.trim() : "";
+    const content = contentInput ? contentInput.value.trim() : "";
+    const missingFields = [];
+
+    if (titleInput) {
+        titleInput.setAttribute("aria-invalid", title === "" ? "true" : "false");
+    }
+
+    if (contentInput) {
+        contentInput.setAttribute("aria-invalid", content === "" ? "true" : "false");
+    }
+
+    if (title === "") {
+        missingFields.push("title");
+    }
+
+    if (content === "") {
+        missingFields.push("content");
+    }
+
+    if (missingFields.length === 0) {
+        if (resMsg) {
+            resMsg.className = "";
+            resMsg.textContent = "";
+        }
+        return true;
+    }
+
+    if (resMsg) {
+        resMsg.className = "text-danger";
+        resMsg.textContent = missingFields.length === 2
+            ? "Please enter a title and content before submitting."
+            : `Please enter ${missingFields[0]} before submitting.`;
+    }
+
+    if (title === "" && titleInput) {
+        titleInput.focus();
+    } else if (contentInput) {
+        contentInput.focus();
+    }
+
+    return false;
+}
+
+document.addEventListener("input", (e) => {
+    const field = e.target;
+    const form = field.closest("#blogPostForm");
+
+    if (!form || !field.matches('[name="title"], [name="content"]')) {
+        return;
+    }
+
+    const formAction = new URL(form.action || "/blog/create", window.location.origin);
+    if (formAction.pathname !== "/blog/create") {
+        return;
+    }
+
+    field.setAttribute("aria-invalid", field.value.trim() === "" ? "true" : "false");
 });
 
 
