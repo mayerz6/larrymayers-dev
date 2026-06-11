@@ -20,6 +20,33 @@ function fetchBlogPosts(PDO $db): array
     return $stmt->fetchAll(PDO::FETCH_ASSOC);
 }
 
+// function fetchBlogPostById(PDO $db, int $id): ?array
+// {
+//     $stmt = $db->prepare("
+//         SELECT id, title, content, created_at
+//         FROM blog_posts
+//         WHERE id = :id
+//         LIMIT 1
+//     ");
+//     $stmt->execute([':id' => $id]);
+//     $post = $stmt->fetch(PDO::FETCH_ASSOC);
+//     return $post ?: null;
+
+// }
+
+function blogSummary(string $content, int $sentences = 2): string
+{
+    $content = trim(strip_tags($content));
+
+    preg_match_all('/[^.]+[.]/', $content, $matches);
+
+    if (!empty($matches[0])) {
+        return trim(implode(' ', array_slice($matches[0], 0, $sentences)));
+    }
+
+    return mb_substr($content, 0, 160) . '...';
+}
+
 function fetchBlogTagsMap(PDO $db): array
 {
     $stmt = $db->query("
@@ -201,10 +228,15 @@ function blogUpdate(): void
 function blogManage(): void
 {
     requireAuth();
-
     $db = blogDb();
+    $blogPosts = fetchBlogPosts($db);
+
+    foreach ($blogPosts as &$post) {
+        $post['summary'] = blogSummary($post['content'], 2);
+    }
+    unset($post);
     view('blog-manage', [
-        'posts' => fetchBlogPosts($db),
+        'posts' => $blogPosts,
         'tags' => fetchBlogTagsMap($db),
         'flash' => $_SESSION['flash'] ?? null,
     ]);
@@ -212,12 +244,33 @@ function blogManage(): void
     unset($_SESSION['flash']);
 }
 
-function blog(): void
+function blogPost(): void
 {
     $db = blogDb();
 
+    $id = (int) ($_GET['id'] ?? 0);
+    $post = fetchBlogPost($db, $id);
+
+    if (!$post) {
+        http_response_code(404);
+        view('404');
+        return;
+    }
+
+    view('blog-post', ['post' => $post]);
+}
+
+function blog(): void
+{
+    $db = blogDb();
+    $blogPosts = fetchBlogPosts($db);
+    foreach ($blogPosts as &$post) {
+        $post['summary'] = blogSummary($post['content']);
+    }
+    unset($post);
+
     view('blog', [
-        'posts' => fetchBlogPosts($db),
+        'posts' => $blogPosts,
         'tags' => fetchBlogTagsMap($db),
     ]);
 }
