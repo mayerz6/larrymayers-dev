@@ -20,6 +20,7 @@ $routes = [
     'GET /blog/manage' => ['handler' => 'blogManage', 'args' => []],
     'GET /blog/create' => ['handler' => 'blogCreateForm', 'args' => []],
     'GET /blog/edit' => ['handler' => 'blogEditForm', 'args' => []],
+    'GET /blog/post' => ['handler' => 'blogPost', 'args' => []],
 
     // 'GET /expertise' => ['handler' => 'expertise', 'args' => []],
     'POST /projects/create' => ['handler' => 'projectCreate', 'args' => []],

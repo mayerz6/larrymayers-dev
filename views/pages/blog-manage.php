@@ -21,7 +21,7 @@
                 <?php foreach ($posts as $post): ?>
                 <article class="card card-body">
                     <h3><?php echo htmlspecialchars($post['title']); ?></h3>
-                    <p class="text-small"><?php echo htmlspecialchars($post['content']); ?></p>
+                    <p class="text-small"><?php echo htmlspecialchars($post['summary']); ?></p>
                     <p>
                         <a class="btn btn-info" href="/blog/edit?id=<?php echo (int) $post['id']; ?>">Edit</a>
                     </p>

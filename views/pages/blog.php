@@ -16,7 +16,8 @@
                     <div class="card">
                         <div class="card-body">
                             <h3 class="card-title"><?= htmlspecialchars($post['title']) ?></h3>
-                            <p class="card-text"><?= htmlspecialchars($post['content']) ?></p>
+                            <p class="card-text"><?= htmlspecialchars($post['summary']) ?></p>
+                            <a href="/blog/post?id=<?= (int) $post['id'] ?>" class="btn btn-primary">Read More</a>
                         </div>
                     </div>
                 </div>
