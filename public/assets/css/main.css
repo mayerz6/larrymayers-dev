@@ -297,6 +297,18 @@
     color: #08111f;
   }
 
+   .btn-danger {
+    margin: 1em 0em 0em 0em;
+    background: #911919;
+    color: #ffffff;
+  }
+
+  .btn-danger:hover {
+    background: rgb(145, 25, 25, 0.74);
+;
+  }
+
+
   .btn-primary:hover {
     background: var(--primary-strong);
   }
