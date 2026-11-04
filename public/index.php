@@ -1,7 +1,7 @@
 <?php
 
 declare(strict_types=1);
-$rootDir = __DIR__ . "/../"; // Adjust as needed to point to the root directory
+$rootDir = __DIR__ . "/../larrymayers-app"; // Adjust as needed to point to the root directory
 
 if (session_status() === PHP_SESSION_NONE) {
     session_start();
