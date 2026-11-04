@@ -5,14 +5,16 @@
             <section id="welcome">
                 <div class="container">
                     
-                     <h1>Career Profile</h1>
-                     <b><small>Engineering Data. Developing the Web....get to know me</small></b>
-                     <p>I’m a Data Engineer and Web Developer dedicated to bridging the gap between complex 
-                        backend architecture and seamless frontend experiences.</p>
-                     <b><small>My professional showcase</small></b>
-                    <p>From hardening API security to scaling ETL pipelines, I build robust digital infrastructure
-                    with a focus on performance and integrity. Welcome to my live-action portfolio—explore my latest 
-                    builds and technical growth in real-time.</p>
+                     <h1>Software &amp; Data Systems Engineer</h1>
+                     <b><small>Backend Automation · Data Engineering · Systems Integration</small></b>
+                     <p>I develop and support data-driven software systems, combining Python, SQL, PHP, and infrastructure experience to improve operational reliability, automate workflows, and transform raw information into useful business data.</p>
+                    
+                    <p>My background spans web application development, technical support, cybersecurity environments, and data engineering, with a focus on building maintainable solutions that connect technology with business needs.</p>
                 </div>
             </section>            
         </main>
+        
+        <br>
+        <br>
+        <br>
+        <br>
