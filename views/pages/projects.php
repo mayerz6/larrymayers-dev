@@ -5,7 +5,7 @@
         <div class="container">
             
             <h1>Projects Catalog</h1>
-            <p class="lead">Selected technical work, systems, and product builds.</p>
+            <p class="lead"> <b><small>My professional showcase</small></b> | Selected technical work, system deployments, &amp; product builds.</p>
 
             <?php if (empty($projects)): ?>
                 <div class="card-body">
