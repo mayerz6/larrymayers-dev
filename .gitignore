@@ -8,5 +8,6 @@ node_modules/
 #ignore ALL .rar files
 *.rar
 
-projects/
+public/dev-projects/*
+projects/*
 Secrets.*
