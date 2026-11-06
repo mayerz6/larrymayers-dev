@@ -109,7 +109,7 @@ No explicit `session_set_cookie_params()` call was found. Cookie `Secure`, `Http
 ---
 
 ### PORT-9 — Wire up the missing single blog-post route
-**Type:** Bug | **Priority:** P1
+**Type:** Bug | **Priority:** P1 | **Status: Done (2026-11-05)**
 
 **Description:**
 `BlogController.php` has `fetchBlogPost(PDO $db, int $id)` and `views/pages/blog-post.php` exists, but `Router.php` has no `GET /blog/post` (or `/blog/{id}`-style) entry. Public visitors can't open an individual post from the blog listing.
@@ -117,6 +117,8 @@ No explicit `session_set_cookie_params()` call was found. Cookie `Secure`, `Http
 **Acceptance Criteria:**
 - A route (e.g. `GET /blog/post?id=ID`) is added, wired to a new `blogPost()` handler using the existing `fetchBlogPost()` helper.
 - Blog listing links to the new route and it renders the full post.
+- **Also found and fixed in the same pass:** `views/pages/blog-post.php` had been deleted along with the rest of the old root-level `views/` folder during the earlier cleanup session — it was never actually duplicated into `larrymayers-app/views/pages/`, so the template this ticket depends on didn't exist there either. Restored from git history (`git show HEAD -- views/pages/blog-post.php`) into `larrymayers-app/views/pages/blog-post.php`.
+- **Also found and fixed:** `POST /blog/create` and `POST /blog/update` were commented out in `larrymayers-app/src/Core/Router.php` — an uncommitted local edit (confirmed via `git diff`, not present in any commit), unrelated to this ticket but discovered while testing it. Both are restored. Covered going forward by `tests/Smoke/BlogJourneyTest.php`.
 
 ---
 
@@ -227,22 +229,25 @@ Projects CMS has create/edit/update but no delete action, unlike Resume which ha
 ---
 
 ### PORT-19 — Install PHPUnit and add unit tests for normalization helpers
-**Type:** Testing | **Priority:** P1
+**Type:** Testing | **Priority:** P1 | **Status: Done (2026-11-05)**
 
 **Acceptance Criteria:**
 - `tests/Unit/NormalizeDutiesTest.php` and `tests/Unit/NormalizeTechnologiesTest.php` exist and pass.
-- Tests run against `database/app_test.sqlite`, never `app.sqlite`.
+- ~~Tests run against `database/app_test.sqlite`, never `app.sqlite`.~~ Superseded: Unit tests call the normalize functions directly with no database at all (see `docs/PHPUNIT_TUTORIAL.md` Part 1). The `app_test.sqlite`-based isolation this line originally called for is instead handled by the Smoke tier (PORT-20), which builds its own disposable SQLite file per run via `tests/Smoke/Support/SmokeServer.php` rather than reusing a shared `app_test.sqlite`.
+- Also added: `tests/Unit/ResponseHelperTest.php` for `isAjaxRequest()`, not originally scoped in this ticket but the same tier/pattern.
 
 ---
 
 ### PORT-20 — Add integration tests proving unauthenticated POSTs are blocked
-**Type:** Testing | **Priority:** P1
+**Type:** Testing | **Priority:** P1 | **Status: Partially done (2026-11-05)**
 
 **Description:**
 This is the single highest-value test per `TESTING_CICD_STRATEGY.md` — directly protects against the kind of auth gap PORT-6 is meant to catch.
 
 **Acceptance Criteria:**
 - One test per protected POST route (`resume/create`, `resume/update`, `resume/delete`, `projects/create`, `projects/update`, `blog/create`, `blog/update`, `messages/delete`) asserting a logged-out request is rejected or redirected, not executed.
+- **Done so far:** `tests/Smoke/AuthRoutesTest.php` covers `/resume/create` (redirect + row-count-unchanged proof) plus login success/failure and the `/dashboard` redirect. `tests/Smoke/ResumeJourneyTest.php` covers the authenticated happy path end to end.
+- **Remaining:** the same pattern needs to be repeated for `resume/update`, `resume/delete`, `projects/create`, `projects/update`, `blog/create`, `blog/update`, and `messages/delete`. Each is a short addition to `AuthRoutesTest.php` following the exact shape of `testAnonymousPostToResumeCreateIsRejectedAndNoRowIsInserted()`.
 
 ---
 

@@ -1,14 +1,17 @@
 <?php ?>
 
 <main>
+    <section class="section" id="projectManage">
+        <div class="container">
+            <p class="eyebrow">Insights</p>
     <h1>Project Management Dashboard | Secure Access Only</h1>
     <?php if(!empty($flash)) : ?>   
         <div class="alert alert-info">
             <?php echo htmlspecialchars($flash); ?>
         </div>
     <?php endif; ?>
-    <section id="projectList">
-        <div class="container">
+    <!-- <section id="projectList"> -->
+        <!-- <div class="container"> -->
             <h2><em>Manage Projects Catalog</em></h2>
             <p><a href="/projects/create" class="btn btn-primary mb-3">+ Add New Project</a></p>
             <?php if(!empty($projects)): ?>

@@ -23,7 +23,8 @@
                     <h3><?php echo htmlspecialchars($post['title']); ?></h3>
                     <p class="text-small"><?php echo htmlspecialchars($post['content']); ?></p>
                     <p>
-                        <a class="btn btn-info" href="/blog/edit?id=<?php echo (int) $post['id']; ?>">Edit</a>
+                        <button class="btn btn-primary"><a href="/blog/edit?id=<?php echo (int) $post['id']; ?>">Edit</a></button>
+                        <button class="btn btn-primary"><a href="/blog/post?id=<?php echo (int) $post['id']; ?>">Read More</a></button>
                     </p>
                 </article>
                 <?php endforeach; ?>

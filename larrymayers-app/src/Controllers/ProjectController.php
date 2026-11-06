@@ -69,7 +69,10 @@ function projectManage(): void
 function projectCreateForm(): void
 {
     requireAuth();
-    view('project-create');
+    view('project-create', [
+        'flash' => $_SESSION['flash'] ?? null,
+    ]);
+    unset($_SESSION['flash']);
 }
 
 function projectCreate(): void

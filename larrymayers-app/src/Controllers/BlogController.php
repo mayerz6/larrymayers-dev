@@ -221,3 +221,24 @@ function blog(): void
         'tags' => fetchBlogTagsMap($db),
     ]);
 }
+
+function blogPost(): void
+{
+    $id = filter_input(INPUT_GET, 'id', FILTER_VALIDATE_INT);
+    if (!$id) {
+        $_SESSION['flash'] = 'Missing blog post ID.';
+        redirectTo('/blog');
+    }
+
+    $db = blogDb();
+    $post = fetchBlogPost($db, $id);
+
+    if (!$post) {
+        $_SESSION['flash'] = 'Blog post not found.';
+        redirectTo('/blog');
+    }
+
+    view('blog-post', [
+        'post' => $post,
+    ]);
+}

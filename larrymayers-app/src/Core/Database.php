@@ -29,7 +29,11 @@ class Database
     {
         if (self::$conn === null) {
             try {
-                self::$conn = new PDO("sqlite:" . __DIR__ . "/../../database/app.sqlite");
+                // PORTFOLIO_DB_PATH lets tests (or any environment) point this at a
+                // disposable SQLite file instead of the real database. When unset,
+                // behavior is unchanged from before: the real app.sqlite is used.
+                $dbPath = getenv('PORTFOLIO_DB_PATH') ?: (__DIR__ . "/../../database/app.sqlite");
+                self::$conn = new PDO("sqlite:" . $dbPath);
                 self::$conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
                 self::$conn->exec("PRAGMA foreign_keys = ON");
             } catch (PDOException $e) {
@@ -37,6 +41,16 @@ class Database
             }
         }
         return self::$conn;
+    }
+
+    /**
+     * Allows a disposable test server (or anything that re-runs the process)
+     * to force a fresh connection instead of reusing a cached one that points
+     * at a different database file.
+     */
+    public static function resetConnection(): void
+    {
+        self::$conn = null;
     }
 
 

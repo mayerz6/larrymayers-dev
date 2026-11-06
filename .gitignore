@@ -11,3 +11,8 @@ node_modules/
 public/dev-projects/*
 projects/*
 Secrets.*
+
+# PHPUnit
+.phpunit.cache/
+.phpunit.result.cache
+tools/.phpunit.result.cache
