@@ -398,66 +398,12 @@ async function handleDelete(e) {
 }
 
 
-async function loadResume() {
-    const resumeContainer = document.querySelector(".accordion");
-    if (!resumeContainer) return;
-
-    const res = await fetch("/resume", {
-        method: "GET",
-        headers: {
-            "X-Requested-With": "XMLHttpRequest"
-        }
-    });
-    if(!res.ok) {
-        console.error("Failed to fetch resume data");
-        return;
-    }
-    const data = await res.json();
-
-    if (data.status !== "success"){
-        console.error("Failed to fetch resume data");
-        return
-    }
-                data.forEach(position => {
-                const detailsElement = document.createElement("details");
-                const summaryElement = document.createElement("summary");
-                
-                summaryElement.innerHTML = `<h5>${position.title} <span>${position.start_year} - ${position.end_year}</span></h5>`;
-                detailsElement.appendChild(summaryElement);
-
-                const detailContents = document.createElement("div");
-                detailContents.className = "detail-contents";
-
-                const companyElement = document.createElement("u");
-                companyElement.innerHTML = `<span class="company_name">${position.company}</span>`;
-                detailContents.appendChild(companyElement);
-
-                if (position.duties.length > 0) {
-                    const dutiesElement = document.createElement("p");
-                    const dutiesList = document.createElement("ul");
-                    dutiesElement.innerHTML = "<h6>Duties</h6>";
-
-                    position.duties.forEach(duty => {
-                        // const dutyDiv = document.createElement("div");
-                        const dutyListItem = document.createElement("li");
-                        dutyListItem.className = "duty-contents";
-                        dutyListItem.textContent = duty;
-                        // dutiesElement.appendChild(dutyDiv);
-                        dutiesList.appendChild(dutyListItem);
-                    });
-
-                    dutiesElement.appendChild(dutiesList);
-                    detailContents.appendChild(dutiesElement);
-                }
-
-                detailsElement.appendChild(detailContents);
-                resumeContainer.appendChild(detailsElement);
-            });
-    
-}
-
-
-
+// Note: the public resume page no longer fetches and builds its
+// accordion client-side -- resume.php now renders the same <details>/
+// <summary> markup server-side (see views/pages/resume.php), and
+// assets/js/disclosure.js animates the open/close transition. This
+// removed a dead loadResume() function that fetched /resume via AJAX
+// into a ".accordion" container that didn't exist on any current page.
 async function handleSave(e) {
     e.preventDefault();
 

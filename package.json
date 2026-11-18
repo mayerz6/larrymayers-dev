@@ -4,7 +4,9 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "deploy": "gh-pages -d public"
+    "deploy": "gh-pages -d public",
+    "test:e2e": "playwright test",
+    "test:e2e:ui": "playwright test --ui"
   },
   "repository": {
     "type": "git",
@@ -21,6 +23,6 @@
     "gh-pages": "^2.1.1"
   },
   "devDependencies": {
-    "cypress": "^13.10.0"
+    "@playwright/test": "^1.48.0"
   }
 }

@@ -143,7 +143,19 @@ Enterprise expectation:
 
 ### 4. End-to-End Browser Tests
 
-End-to-end tests prove that a real user can use the system through the browser.
+**Status: partially implemented.** `playwright.config.js` and
+`tests/e2e/accordion.spec.js` exist and run against a disposable SQLite
+fixture (`tests/e2e/bootstrap-db.php`), the same seeded admin credentials
+`tests/Smoke/Support/SmokeServer.php` uses for the PHPUnit layer. This
+was added in direct response to a real incident, not speculatively: two
+bugs (a CSS cascade conflict making text invisible, and a dead click
+handler after the app's own SPA content-swap) both slipped past the
+PHPUnit/cURL smoke suite because cURL has no browser engine behind it --
+it cannot compute a CSS cascade and cannot execute JavaScript. Run with
+`npm install` then `npm run test:e2e` (add `:ui` for Playwright's UI mode).
+
+End-to-end tests prove that a real user can use the system through the
+browser.
 
 Recommended tool:
 
@@ -159,12 +171,17 @@ Critical workflows:
 - Admin creates a blog post asynchronously and sees it on the public blog page.
 - Admin edits a blog post and sees the updated content.
 - Admin logs out and cannot access protected admin routes.
+- **Resume/Projects accordion opens on click, including after navigating
+  via the site's own SPA nav links, not just on a direct page load**
+  (covered now, see `tests/e2e/accordion.spec.js`).
 
 Suggested structure:
 
 ```text
 tests/
   e2e/
+    bootstrap-db.php        <- builds the disposable fixture DB (done)
+    accordion.spec.js        <- done
     public-pages.spec.js
     auth.spec.js
     resume-cms.spec.js
@@ -175,7 +192,8 @@ tests/
 Enterprise expectation:
 
 - E2E tests should run in CI before deployment.
-- Screenshots and traces should be saved on failure.
+- Screenshots and traces should be saved on failure (configured via
+  `use.trace`/`use.screenshot` in `playwright.config.js`).
 - Tests should use seeded test data, not manual production data.
 - Tests should cover desktop and mobile viewport basics for navigation.
 
@@ -481,5 +499,17 @@ A feature should not be considered complete until:
 
 ## Practical Priority
 
-The next best testing investment is not full browser automation. The next best move is to add PHPUnit and a test database, then cover authenticated CMS POST routes. That gives the most protection for the current application because the highest-value logic lives in controller workflows and database writes.
+The next best testing investment used to be PHPUnit plus a test database
+before full browser automation, and that work is largely in place now
+(`tests/Unit`, `tests/Smoke`, a disposable SQLite fixture per test class).
+**Playwright has since been added** (`playwright.config.js`,
+`tests/e2e/`), specifically because a real incident proved the cURL-based
+layer has a structural blind spot it can never close on its own: it
+cannot compute a CSS cascade or execute JavaScript, so any bug that only
+shows up in rendered styles or client-side interactivity is invisible to
+it by construction, no matter how much more smoke-test coverage gets
+added. The two layers are complementary, not competing -- keep extending
+PHPUnit for server-rendered/data-layer regressions (cheap, fast), and
+extend Playwright specifically for anything that depends on what a real
+browser actually paints or does in response to a click.
 

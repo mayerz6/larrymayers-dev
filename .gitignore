@@ -16,3 +16,9 @@ Secrets.*
 .phpunit.cache/
 .phpunit.result.cache
 tools/.phpunit.result.cache
+
+# Playwright (tests/e2e/) -- disposable fixture DB + run artifacts, both
+# regenerated on every run by playwright.config.js / bootstrap-db.php
+larrymayers-app/database/e2e_test.sqlite
+test-results/
+playwright-report/

@@ -1,0 +1,202 @@
+
+
+<!DOCTYPE html>
+
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <title>Larry Mayers | Professional Portfolio Platform</title>
+        <link rel="stylesheet" href="/assets/css/main.css">
+        <link rel="stylesheet" href="/assets/css/style.css">
+        <link rel="icon" href="/assets/favicon.ico" type="image/x-icon">
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;600;700&family=JetBrains+Mono:wght@400;600&display=swap"
+        rel="stylesheet">
+
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+        <script src="/assets/js/script.js" defer></script>
+        <script src="/assets/js/app.js" defer></script>
+    </head>
+
+    <body>
+        <header class="site-header">
+            <div class="container">
+                <nav class="nav" aria-label="Primary navigation">
+                    <a class="brand" href="/profile" aria-label="Larry Mayers home">
+                        <!-- <span class="brand-mark">LM</span> -->
+                        <span class="brand-mark"><img src="/assets/img/lm-graphic.png" alt="Larry Mayers" width="36" height="36"></span>
+                        <span>Larry Mayers</span>
+                    </a>
+
+                    <button
+                        class="nav-toggle"
+                        type="button"
+                        aria-label="Toggle navigation"
+                        aria-controls="primary-navigation"
+                        aria-expanded="false"
+                    >
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                    </button>
+
+                    <ul class="nav-links" id="primary-navigation">
+                        <li><a href="/profile">Profile</a></li>
+                        <li><a href="/about">About</a></li>
+                        <li><a href="/projects">Projects</a></li>
+                        <li><a href="/resume">Resume</a></li>
+                        <li><a href="/contact">Contact</a></li>
+                                             </ul>
+                </nav>
+            </div>
+        </header>
+
+        <div id="app">
+
+<main>
+    <section class="section" id="resumeList">
+        <div class="container">
+            <h1>Resume Catalog</h1>
+            <p class="lead">Selected work experience and professional history. Click a role to expand it.</p>
+
+                            <div class="resume-feed">
+                                                                    <details class="resume-entry">
+                            <summary>
+                                <span class="resume-role">
+                                    <strong>Data Engineer</strong>
+                                    <span class="resume-company">at Protexxa</span>
+                                </span>
+                                <span class="resume-years">
+                                    2023                                    &ndash;
+                                    Present                                </span>
+                                <span class="resume-chevron" aria-hidden="true"></span>
+                            </summary>
+                            <div class="resume-entry-body">
+                                <div class="resume-entry-body-inner">
+                                                                            <p>Engineering expert who designs, builds, and maintains scalable data infrastructure, pipelines, and architectures to convert raw data into usable information for analysis. They collaborate with data scientists to ensure data quality, security, and accessibility, primarily using SQL, Python, and cloud platforms to support business intelligence, AI, and decision-making</p>
+                                    
+                                                                            <ul class="resume-duties">
+                                                                                            <li>ETL procedures for a cutting-edge cyber security platform.</li>
+                                                                                            <li>Juggled AWS services like S3, EC2, EMR, and RDS with flair.</li>
+                                                                                            <li>Architected data warehousing solutions using AWS Glue, Redshift, and friends.</li>
+                                                                                            <li>Troubleshooter extraordinaire, ensuring data pipeline integrity.</li>
+                                                                                            <li>Collaborated cross-functionally to design efficient data models.</li>
+                                                                                            <li>Explored and integrated Machine Learning models to enhance data analytics.</li>
+                                                                                    </ul>
+                                                                    </div>
+                            </div>
+                        </details>
+                                                                    <details class="resume-entry">
+                            <summary>
+                                <span class="resume-role">
+                                    <strong>Network Administrator &amp; QA Analyst</strong>
+                                    <span class="resume-company">at Candrug International Ltd.</span>
+                                </span>
+                                <span class="resume-years">
+                                    2019                                    &ndash;
+                                    2023                                </span>
+                                <span class="resume-chevron" aria-hidden="true"></span>
+                            </summary>
+                            <div class="resume-entry-body">
+                                <div class="resume-entry-body-inner">
+                                                                            <p>Network Administrator and Web QA Analyst role involves maintaining the infrastructure and ensuring the quality of digital platforms. The Network Administrator aspect focuses on installing, configuring, and maintaining network hardware, servers, and security (VPNs, firewalls, LAN/WAN). The Web QA Analyst aspect focuses on testing web applications, identifying bugs, and verifying functionality.</p>
+                                    
+                                                                            <ul class="resume-duties">
+                                                                                            <li>Masterminded ETL procedures for a cutting-edge cyber security platform.</li>
+                                                                                            <li>Juggled AWS services like S3, EC2, EMR, &amp;amp; RDS with flair.</li>
+                                                                                            <li>Architected data warehousing solutions using AWS Glue, Redshift, and friends.</li>
+                                                                                            <li>Troubleshooter extraordinaire, ensuring data pipeline integrity.</li>
+                                                                                            <li>Collaborated cross-functionally to design efficient data models.</li>
+                                                                                            <li>Explored and integrated Machine Learning models to enhance data analytics.</li>
+                                                                                    </ul>
+                                                                    </div>
+                            </div>
+                        </details>
+                                                                    <details class="resume-entry">
+                            <summary>
+                                <span class="resume-role">
+                                    <strong>Web Developer &amp; Network Administrator</strong>
+                                    <span class="resume-company">at Candrug International Ltd.</span>
+                                </span>
+                                <span class="resume-years">
+                                    2017                                    &ndash;
+                                    2019                                </span>
+                                <span class="resume-chevron" aria-hidden="true"></span>
+                            </summary>
+                            <div class="resume-entry-body">
+                                <div class="resume-entry-body-inner">
+                                                                            <p>A combined Web Developer &amp; Network Administrator role manages an organization&#039;s digital infrastructure, bridging front-end web presence with back-end network stability. They build/maintain websites while installing, configuring, and securing LANs, WANs, servers, and routers. Key tasks include monitoring network performance, cybersecurity, and ensuring high website availability.</p>
+                                    
+                                                                            <ul class="resume-duties">
+                                                                                            <li>Propose wireframe illustrations for the web interfaces on a per project basis.</li>
+                                                                                            <li>Manages user account deployment along with technical support within an active directory environment.</li>
+                                                                                            <li>Actively administer and manage the network, workstation operating systems, security systems, safety backups and servers related to the systems within the company network.</li>
+                                                                                            <li>Assist and support in the upkeep and maintenance of websites as business requirements evolve.</li>
+                                                                                            <li>Troubleshooting network/internet errors and problems.</li>
+                                                                                            <li>Provide reports on monthly online engagement (via predefined KPI metrics) of ecommerce sites to give direction to business development objectives.</li>
+                                                                                            <li>Advise on the acquisitions of hardware and software as necessary to mitigate company infrastructure vulnerabilities.</li>
+                                                                                            <li>Maintain inventory documentation of technological company assets.</li>
+                                                                                            <li>Maintain bug tracking of any faults (system, network or web-based application) and record the associated remediation steps &amp; subsequent solution.</li>
+                                                                                    </ul>
+                                                                    </div>
+                            </div>
+                        </details>
+                                                                    <details class="resume-entry">
+                            <summary>
+                                <span class="resume-role">
+                                    <strong>Information Technology Coordinator &amp; Research Co-Supervisor</strong>
+                                    <span class="resume-company">at The Substance Abuse Foundation Inc.</span>
+                                </span>
+                                <span class="resume-years">
+                                    2015                                    &ndash;
+                                    2017                                </span>
+                                <span class="resume-chevron" aria-hidden="true"></span>
+                            </summary>
+                            <div class="resume-entry-body">
+                                <div class="resume-entry-body-inner">
+                                                                            <p>Information Technology (IT) Coordinator &amp; Research Co-Supervisor is a hybrid role, typically found in academic, medical, or research-intensive environments. It combines hands-on IT infrastructure management with the administrative oversight of research data systems, compliance, and team supervision.</p>
+                                    
+                                                                            <ul class="resume-duties">
+                                                                                            <li>Coordination of Research Methodologies - Take responsibility for the planning, administration and reviewing of research activities necessary to investigate specified research hypotheses.</li>
+                                                                                            <li>Coordinate Research Interns – Management and assignment of tasks; for execution by team of research interns.</li>
+                                                                                            <li>Supervise Statistical Analysis – Accurately outline, monitor and examine trends during the evolution of the statistical dissemination process.</li>
+                                                                                            <li>Statistical Reporting – Present research findings and influence programme effectiveness to strengthen the Clinical team.</li>
+                                                                                            <li>Management of Social Media presence - Take responsibility for the day-to-day management of the online content to ensure a sustained audience via Facebook services.</li>
+                                                                                            <li>Management of the institution&#039;s official website, its content and their sustained presence.</li>
+                                                                                            <li>Manages user account deployment along with technical support within an active directory environment.</li>
+                                                                                            <li>Actively administer and manage the network, workstation operating systems, security systems, safety backups and servers related to the systems within the company network.</li>
+                                                                                            <li>Maintain inventory documentation of technological company assets.</li>
+                                                                                    </ul>
+                                                                    </div>
+                            </div>
+                        </details>
+                                    </div>
+                    </div>
+    </section>
+</main>
+
+        </div>
+
+        <footer class="site-footer">
+            <div class="container footer-inner">
+                <div class="footer-copy">
+                    <span style="display: none;" class="footer-label">Available online</span>
+                    <p>&copy; Copyright 2026 | Larry Mayers | All rights reserved.</p>
+                </div>
+
+                <nav class="footer-nav" aria-label="Social links">
+                    <h4>Follow</h4>
+                    <ul class="social-links">
+                        <li><a href="https://github.com/larrymayers" target="_blank" rel="noopener noreferrer">GitHub</a></li>
+                        <li><a href="https://www.linkedin.com/in/larry-mayers-9b1a5b1a3/" target="_blank" rel="noopener noreferrer">LinkedIn</a></li>
+                        <li><a href="https://twitter.com/larrymayers" target="_blank" rel="noopener noreferrer">Twitter</a></li>
+                    </ul>
+                </nav>
+            </div>
+        </footer>
+
+    </body>
+    </html>

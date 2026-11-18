@@ -2,11 +2,22 @@ header h1 {
     font-size: 2.5em;
     color: #333;
     margin: 0;
-    outline: 1px solid #ccc; /* Debugging outline */
 }
 
-div#app, div#app h1 {
-    color: #333;
+/*
+  Note: #app used to carry a light background + dark text override here
+  (background-color: #f9f9f9, color: #333), left over from before the
+  dark theme existed. It was overriding main.css's dark theme for the
+  ENTIRE content region on every page -- not just Resume/Projects, just
+  less noticeable there because darker text colors happened to still be
+  readable on a light background by coincidence. Removed; the page's
+  real background now comes from body { background: var(--bg) } in
+  main.css, with no competing override.
+*/
+div#app {
+    margin: 0px;
+    padding: 20px;
+    border: 0px solid #1a1818;
 }
 
 .text-success {
@@ -16,19 +27,6 @@ div#app, div#app h1 {
 .text-danger {
     color: #dc3545;
     font-weight: bolder;
-}
-div#logo {
-    /* display: flex;
-    justify-content: left;
-    margin: 0px; */
-    background-color: #fff;
-}
-div#app {
-    margin: 0px;
-    padding: 20px;
-    background-color: #f9f9f9;
-    border: 0px solid #1a1818;
-    /* border-radius: 5px; */
 }
 
 .message-list {
@@ -74,25 +72,8 @@ div#app {
   color: #777;
 }
 
-.accordion {
-    margin-top: 20px;
-    max-width: 100%;
-    width: calc(100% - 20px);
- }
-
- details {
-    border: 2px solid #000;
-    margin: 10px 0px 10px 0px;
-    padding: 10px;
- }
-
- details summary {
-    color: #2e2c20; 
-    padding: 5px 10px;
-    font-size: 1.3em;
-    cursor: pointer;
-    font-weight: bold;
-    border-bottom: 4px solid #ccc; /* Debugging outline */
- }
-
- details summary h5 { margin: 0;}
+/*
+  Resume accordion styling lives in assets/css/main.css now (the
+  ".resume-feed" rules), alongside the rest of the design system's
+  tokens, instead of here as a standalone debug block.
+*/

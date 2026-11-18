@@ -49,10 +49,6 @@ final class ProjectJourneyTest extends TestCase
 
         $client = new HttpClient(self::$server->baseUrl());
 
-        // The real create endpoint is POST /projects/create -- there is no
-        // route for POST /projects at all (only GET /projects, the public
-        // catalog). Posting to /projects hits the app's 404 handler, not an
-        // auth check, which is why that was the wrong URL to test against.
         $response = $client->post('/projects/create', [
             'title' => 'Unauthorized Project',
             'description' => 'This should not be created.',
